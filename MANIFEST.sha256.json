@@ -1,0 +1,537 @@
+{
+  "archive_date": "2026-09-30",
+  "timezone": "Asia/Shanghai",
+  "paper": "paper/67A论文.pdf",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 9,
+      "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 168,
+      "sha256": "cf145d910b3ed60d8279a3e729f1c668a723f4df29dc8ffbfe597acf74fb31a7"
+    },
+    {
+      "path": "A题.md",
+      "bytes": 8975,
+      "sha256": "f2bd9dd99237f6dc4dd67ad3d15f1fa0df7562eb9ee18329dd4eb334aff68a2d"
+    },
+    {
+      "path": "code/audit.py",
+      "bytes": 7749,
+      "sha256": "8b8eb5e4bd1f2b7d2facbdca7da39366954e2476abfa73dcf60fa52e24866b65"
+    },
+    {
+      "path": "code/common.py",
+      "bytes": 6654,
+      "sha256": "4138e1facfa56a3c01eba9a69dbd4c9db041500de2bd38048f79ed68cce00495"
+    },
+    {
+      "path": "code/export_figure2_data.py",
+      "bytes": 1249,
+      "sha256": "5c8f427c5490b040bf2fe4bff38bc8d37691503e745212fe71afb7ba63514e4c"
+    },
+    {
+      "path": "code/export_figure8b_data.py",
+      "bytes": 1174,
+      "sha256": "65856a464527a0b852b8b622b2edf79930342fb0dee9df2ddf9451d4855cbd0b"
+    },
+    {
+      "path": "code/figures.py",
+      "bytes": 16244,
+      "sha256": "44f744d431947bdd6747757f3ca8f136156b0de206f95cecf6582ea61153434c"
+    },
+    {
+      "path": "code/p1.py",
+      "bytes": 8507,
+      "sha256": "4a3524f2b8c0dfd86f8b16f967d3b10894e67f92db00d896c64b2d3e14296d70"
+    },
+    {
+      "path": "code/p23.py",
+      "bytes": 20010,
+      "sha256": "e8968e60cf446d252b06f0356984783e61935e959e9ba7d4ca9061cf501d7dcc"
+    },
+    {
+      "path": "code/p4.py",
+      "bytes": 17003,
+      "sha256": "7e6964ed3119f4a7bce09ad10252747fac83c007a6db8d1bdd3d6490d5968b21"
+    },
+    {
+      "path": "code/sensitivity.py",
+      "bytes": 3252,
+      "sha256": "8751afb655eb2f684d9d7b2721223180a913caa4eaf79b04596624c5fab58f44"
+    },
+    {
+      "path": "code/verify.py",
+      "bytes": 5981,
+      "sha256": "b370833777e9c6ea49c033fa6a1b24149cff149d38d5138657832a0f86cbe828"
+    },
+    {
+      "path": "paper/67A论文.pdf",
+      "bytes": 4784581,
+      "sha256": "ef47999abd3d585ec8c5c93a4bd98331ab055429312cd9dc1f6b46e9a9b8d183"
+    },
+    {
+      "path": "paper/67A论文.tex",
+      "bytes": 3884,
+      "sha256": "7ac90e7f8bd6e87121fc623b2e4df4c1faa9ad7d80afc67577255fc24bdfa362"
+    },
+    {
+      "path": "paper/ai-usage.tex",
+      "bytes": 13163,
+      "sha256": "be9ab78188be6479b7821965d2feaf9b902b1b27e00dfdea54adb665132a6943"
+    },
+    {
+      "path": "paper/AI工具使用详情.pdf",
+      "bytes": 151287,
+      "sha256": "c1e2edcee76b3fcf06e25db9d86be4cfc6bf10198755be110216401c2c36e051"
+    },
+    {
+      "path": "paper/body.tex",
+      "bytes": 58640,
+      "sha256": "9af9dc405af788bdbca82b32bba1ee3ecb41b4081bbf33a97182aa05a8417c0d"
+    },
+    {
+      "path": "paper/cumcm2026.sty",
+      "bytes": 3189,
+      "sha256": "291dbfb2fff80d3dcc654d1f10a6354e2988f9edf56508156a155876faac2ecf"
+    },
+    {
+      "path": "paper/cumcmthesis.cls",
+      "bytes": 26370,
+      "sha256": "630968bcc97a5bfb296ae834298c28d1768f96b762e81bd8d267312c0a14bb92"
+    },
+    {
+      "path": "paper/figures/fig00_framework.png",
+      "bytes": 1169052,
+      "sha256": "8285a2d562afe489e9f643420109d8595d23187f5051c1bc811723335e2537ff"
+    },
+    {
+      "path": "paper/figures/fig01_env_limits.tex",
+      "bytes": 177,
+      "sha256": "b2857a19ef6f0258d1a5b3989cb900796201f0175c93c16fca1852b1025b78c6"
+    },
+    {
+      "path": "paper/figures/fig01_env_records.dat",
+      "bytes": 13019,
+      "sha256": "5ed31f4194add8cbcae785dac3ffc54e7bb92526a925dbc43687239e5ce6883a"
+    },
+    {
+      "path": "paper/figures/fig01_env_style.tex",
+      "bytes": 4073,
+      "sha256": "7541b410995b45e34dd865c19578d5cad911544442f507dbd446f35477877b26"
+    },
+    {
+      "path": "paper/figures/fig02_p1_T.pdf",
+      "bytes": 882140,
+      "sha256": "65d4064639ce5c196f97490d2f877ca93ea20b1047065bc7dc54c70c4601b36a"
+    },
+    {
+      "path": "paper/figures/fig03_p1_C.pdf",
+      "bytes": 868024,
+      "sha256": "d16d1bc6ef60183cb5a52426fba15f0dd8ca509825d61eb13e7432c63ce00590"
+    },
+    {
+      "path": "paper/figures/fig04_convergence.pdf",
+      "bytes": 37172,
+      "sha256": "78d34d488e6889d885b43922d2ba6ed0bca725bfade0ee84e1c441214070d376"
+    },
+    {
+      "path": "paper/figures/fig05_p2.pdf",
+      "bytes": 37558,
+      "sha256": "d79a1c0362dc1c4a2d3502926d713a6f2fb7e9b30fe26185e2e80bf501623294"
+    },
+    {
+      "path": "paper/figures/fig06_p3.pdf",
+      "bytes": 38930,
+      "sha256": "9d3d644a1d4ddf9c90f60559f7c5af8bee839a6784288adcb2bc63f6de537a13"
+    },
+    {
+      "path": "paper/figures/fig07_p4.pdf",
+      "bytes": 1162895,
+      "sha256": "dc883b4d6c0b65409c55f4b5bf92a127e8e53bcd35f936c4472e91ef35310dd7"
+    },
+    {
+      "path": "paper/figures/fig08b_curves.dat",
+      "bytes": 156421,
+      "sha256": "d4d266e0bde8a0a93d5958a1d335706da5eb72251c3f1aa9e477677e5e328b7e"
+    },
+    {
+      "path": "paper/figures/fig08b_endpoint.tex",
+      "bytes": 40,
+      "sha256": "8e517bbec352fb9c06c5dbc249d4697c15ef9e1a5064af200acf6540494ee9bd"
+    },
+    {
+      "path": "paper/figures/fig08b_measurements.dat",
+      "bytes": 330,
+      "sha256": "6c643ffb7c4b84ab5979e2bb91376864f507cc5f329875002985cedfe288f1e0"
+    },
+    {
+      "path": "paper/figures/fig08b_style.tex",
+      "bytes": 3919,
+      "sha256": "6db6e344d57574e4bd208e9af83b3c343a1aea5b19b999f6d6dfca6502b6e636"
+    },
+    {
+      "path": "paper/figures/fig09_sensitivity.pdf",
+      "bytes": 40749,
+      "sha256": "6825441d39190b839ae894ed26c3e510b7a75c2da3202115b6ca9af3636665eb"
+    },
+    {
+      "path": "paper/figures/framework-prompt.txt",
+      "bytes": 15510,
+      "sha256": "83773d24d7d4870f3548b6f52cdcf91ac5bf928cf3ebc9ace278cd78e3343b9b"
+    },
+    {
+      "path": "paper/figures/图1.tex",
+      "bytes": 2081,
+      "sha256": "5e1f4903480cad0ec303bad6e36ac94ef34af2af6910ee21623eebd878bf210a"
+    },
+    {
+      "path": "paper/figures/图10(a).png",
+      "bytes": 121452,
+      "sha256": "d1437bf4c25a28b38237072937dc5e918933b740948cd512ab61800d77ad79be"
+    },
+    {
+      "path": "paper/figures/图10(b).png",
+      "bytes": 223757,
+      "sha256": "5fad49cded7ffc225ec0a25475ec3b7079775ce3a5a65152f555dc5f6ca331cc"
+    },
+    {
+      "path": "paper/figures/图11.pdf",
+      "bytes": 29499,
+      "sha256": "75eaef859a84895269d3fbbc28151951846a58ad111d9609e1f0b8e241f9b385"
+    },
+    {
+      "path": "paper/figures/图12.png",
+      "bytes": 114411,
+      "sha256": "06e1050a9c1b34940cf5ee3fa07e5377507efafe9f94fdfae5609fd5432c5b92"
+    },
+    {
+      "path": "paper/figures/图2.png",
+      "bytes": 1356425,
+      "sha256": "185457575d7dc326f717c8871fcdfb1c61ef6df0b67c0fcf449989ae698c9a34"
+    },
+    {
+      "path": "paper/figures/图3.pdf",
+      "bytes": 31360,
+      "sha256": "ab23cc55c8f2974f11509ae241e0b84ee8336473cead85379eb001d1e70e6e55"
+    },
+    {
+      "path": "paper/figures/图4(a).png",
+      "bytes": 92293,
+      "sha256": "3a0c494853bb82cef2f2122a672f90e2ef1b77998d4ad25a3d2be4a656995041"
+    },
+    {
+      "path": "paper/figures/图4(b).png",
+      "bytes": 93946,
+      "sha256": "34fbd49d3bb891e9a13b4917bcd612a95ae8f3f90871e457b003172f854db239"
+    },
+    {
+      "path": "paper/figures/图5(a).png",
+      "bytes": 91190,
+      "sha256": "d5d5fd20ca2c795459edc35f22231972174d63a127fb1e84dc647614ce1a9bee"
+    },
+    {
+      "path": "paper/figures/图5(b).png",
+      "bytes": 112992,
+      "sha256": "48f6923cc1d260de76dc53b7fafb2210e308434ad64eb9919775bf8fbc453c5b"
+    },
+    {
+      "path": "paper/figures/图7(a).png",
+      "bytes": 105795,
+      "sha256": "b047886e9681a0016b4b808896e9aea8343a07dfee52704983567cd6b6f032a4"
+    },
+    {
+      "path": "paper/figures/图7(b).png",
+      "bytes": 112598,
+      "sha256": "c217fc6c060160062c75f24e5c1c8f7fe10b2acdac8e406b9e3b02e4d1701da9"
+    },
+    {
+      "path": "paper/figures/图8(a).png",
+      "bytes": 109202,
+      "sha256": "0746f13b403a8a31a2e72bd90910b05683cc379d8c41e9c22ca2a099cab66e19"
+    },
+    {
+      "path": "paper/figures/图8(b).png",
+      "bytes": 113457,
+      "sha256": "5f7c83fb9a332bbcda5099832d900bb11d68cd2085c30fb31d008dba10f7b79a"
+    },
+    {
+      "path": "paper/figures/图9.png",
+      "bytes": 1438046,
+      "sha256": "a5a6da563a95ee0b8788dc117ada5c608d81f5a6c969ac12d0575d38ee870546"
+    },
+    {
+      "path": "paper/sec/摘要.tex",
+      "bytes": 3615,
+      "sha256": "344f9cbb9b62c039d0cd1c22b525782726998a3884c323821a05cf218911e573"
+    },
+    {
+      "path": "paper/sec/模型检验与灵敏度分析.tex",
+      "bytes": 4133,
+      "sha256": "6eee77a6c1f4cbec2ed67f37b437745484782de2da3c75ef5774fceca4a4377f"
+    },
+    {
+      "path": "paper/sec/模型评价与改进方向.tex",
+      "bytes": 1563,
+      "sha256": "6329655ea27d9edd98d7b6fb8dc5390b233a79194f57e13d31848827a6fe69d4"
+    },
+    {
+      "path": "paper/sec/问题一模型建立.tex",
+      "bytes": 5975,
+      "sha256": "5100c5fb4513d31a38ec6470501622725225879a107de008c96bc2663f7745bf"
+    },
+    {
+      "path": "paper/sec/问题一模型求解.tex",
+      "bytes": 11043,
+      "sha256": "3a3960b921e9e8f4f5f0766b9f4acd8a481b5a2deecfed015bf1597f56050a01"
+    },
+    {
+      "path": "paper/sec/问题一结果分析.tex",
+      "bytes": 4509,
+      "sha256": "c31ae7d32ca771c03c2569b183f22ac0afc02559593f4fe96fc78f9831a42184"
+    },
+    {
+      "path": "paper/sec/问题三模型建立.tex",
+      "bytes": 1278,
+      "sha256": "a4a27a0fc992be96413d1956b3913544155ecb92c1ba2986c4d88bf3ace88068"
+    },
+    {
+      "path": "paper/sec/问题三模型求解.tex",
+      "bytes": 2922,
+      "sha256": "f69440a76ccf427c8c852a81fd43dd86ce6346f6a43d9a88d87d1caac8d78fc5"
+    },
+    {
+      "path": "paper/sec/问题三结果分析.tex",
+      "bytes": 2582,
+      "sha256": "2095f5224eaf6ad8bb7d1a973bd0f177a9b84eef200dd4578b7064e862b85f2a"
+    },
+    {
+      "path": "paper/sec/问题二模型建立.tex",
+      "bytes": 4279,
+      "sha256": "26aabdd95e7d8781a19ffea2f52698b0c0fd9df0329c420d60788e0902bf2b82"
+    },
+    {
+      "path": "paper/sec/问题二模型求解.tex",
+      "bytes": 4027,
+      "sha256": "03fc7b84ce71ee482dc61939bba7bba25d4d98ce2021aa3e1a4310488785cf4a"
+    },
+    {
+      "path": "paper/sec/问题二结果分析.tex",
+      "bytes": 2652,
+      "sha256": "ec67e5f590630d665714842fa6dd7aa1adedcdceb4090ef32b286207b1607b36"
+    },
+    {
+      "path": "paper/sec/问题四模型建立.tex",
+      "bytes": 6228,
+      "sha256": "114cc634c7c5d7bc15ccf7b5a3a8e9d2c5a10ce7b9bb8097f7f9a40d8c65aa14"
+    },
+    {
+      "path": "paper/sec/问题四模型求解.tex",
+      "bytes": 4512,
+      "sha256": "cdb7b975f918b71e15791f3ce6176abc876b3ab5d35098677c1079f5e4dbcad4"
+    },
+    {
+      "path": "paper/sec/问题四结果分析.tex",
+      "bytes": 4947,
+      "sha256": "73b8e037f0e2b6716c77d77421805cd7609c722079f34f6ce07d711e33a5b922"
+    },
+    {
+      "path": "paper/论文正文.tex",
+      "bytes": 8637,
+      "sha256": "afcd3b4a64366986db1e9b595a4e0b2be306513ac4beecd7431b407d04a15e0e"
+    },
+    {
+      "path": "paper/论文附录.tex",
+      "bytes": 10832,
+      "sha256": "1eab4015eb40ecf4c563d64115014a6acee182495b7923c79d10ae7a9633f290"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5617,
+      "sha256": "10fdb03a07b5f89e8bd904fdea497f549acb8d0a4ca247ae2f278f482cdaf1ea"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 154,
+      "sha256": "c2ca61d65222702c047de2a4cde21759bf3f146853cbe536a01959fd578f497d"
+    },
+    {
+      "path": "verification/result_validation.json",
+      "bytes": 8080,
+      "sha256": "58718cba36289cffdd1a5c824c2bdc9bf9dbbf8d923c33a3aa022744ce9953ff"
+    },
+    {
+      "path": "结果/audit_report.json",
+      "bytes": 3649,
+      "sha256": "18302c05a3b6c5409f8b1819150aacdb3c31e90b51e59e6b31e40a13abf22563"
+    },
+    {
+      "path": "结果/p1_field.npz",
+      "bytes": 620340,
+      "sha256": "b6564c9f1f1c163f97d30fc0d8f2108376f05112788cb9c444a38ab42693a89d"
+    },
+    {
+      "path": "结果/p1_检验数据.md",
+      "bytes": 1630,
+      "sha256": "a38175d78699970bfcf0dc59dcb0cd8aa0e6df082c5f395384df179083df355b"
+    },
+    {
+      "path": "结果/p1_论文表格.md",
+      "bytes": 1061,
+      "sha256": "80c6f3e3d8ec4f90d6910fec0ad77779ed65e7b07143efa793bf3eb7a658cef1"
+    },
+    {
+      "path": "结果/p2_field.npz",
+      "bytes": 3716340,
+      "sha256": "7d912f898dd61f295de5e80938cfcc39544f4de122ebec73f26e8580d3b3b51f"
+    },
+    {
+      "path": "结果/p2_检验数据.md",
+      "bytes": 1355,
+      "sha256": "05c0b059b97c6f1bcbb29a0c953b458848c38b8726c450b20d39af879977945e"
+    },
+    {
+      "path": "结果/p2_论文表格.md",
+      "bytes": 940,
+      "sha256": "2d309bb34291238ddd0aee12ae43275bdff105ae4568ffcfe6a1473cb46dee3c"
+    },
+    {
+      "path": "结果/p3_field.npz",
+      "bytes": 1187846,
+      "sha256": "7d3bb877b960182316767aea9f044e9e66c4561980ff521cf94ded5717ebecb6"
+    },
+    {
+      "path": "结果/p3_检验数据.md",
+      "bytes": 741,
+      "sha256": "19e16cddb96a4b163c3cc979ace0dcd01215483fe63ace8caf218a1d987975e5"
+    },
+    {
+      "path": "结果/p3_论文表格.md",
+      "bytes": 753,
+      "sha256": "ccee6a0366ec77f9843e11628fe4cd933fb2c7bde2c999c17d96b7d1ac8fb7a9"
+    },
+    {
+      "path": "结果/p4_field.npz",
+      "bytes": 615332,
+      "sha256": "c60480ff90e399ad4502089f47cdc3ad063848cdac392710e92240384bf63f1c"
+    },
+    {
+      "path": "结果/p4_检验数据.md",
+      "bytes": 1254,
+      "sha256": "3a0a95e1c82e2bffddb35c8fe7b12266c311f9fde9ac9d1e814511d04459741e"
+    },
+    {
+      "path": "结果/p4_论文表格.md",
+      "bytes": 702,
+      "sha256": "4d7455f2b4fddacca9523fe86ce99b397447ae4771fb485dab73fb91dd686157"
+    },
+    {
+      "path": "结果/result1.xlsx",
+      "bytes": 379253,
+      "sha256": "fe56dbea62f560b21cc473bba068ebe0db780459f6ee0dad6e5aae5c0c950acf"
+    },
+    {
+      "path": "结果/result2.xlsx",
+      "bytes": 2474678,
+      "sha256": "61d44fff06aa5e72e3c9a89ab64cf6b48cdf1a9fab05a789e97ced79a6e13d92"
+    },
+    {
+      "path": "结果/result3.xlsx",
+      "bytes": 352694,
+      "sha256": "5ede8b76a66b95252899cf7c5e55f1d3f2c81984c9b345984a4990e068408663"
+    },
+    {
+      "path": "结果/result4.xlsx",
+      "bytes": 239106,
+      "sha256": "6eceb25e10da855c9a18333b6023c4995f5242fae35d5ed8c6a0124fe3c26c32"
+    },
+    {
+      "path": "结果/sensitivity.npz",
+      "bytes": 1016,
+      "sha256": "66b4d1ae9e0174aa0e36710394f2b0cf3fbfa0f6da40081c6772ee2f60d56738"
+    },
+    {
+      "path": "结果/图预览/fig01_env.png",
+      "bytes": 70642,
+      "sha256": "e43a9815b6cf3c96023ee887baea5621d17b380562e593fcfb49b217f3abfa1c"
+    },
+    {
+      "path": "结果/图预览/fig02_p1_T.png",
+      "bytes": 176115,
+      "sha256": "80e1fd7db33344816942a79d733eddc3069df875c56e86c1c7e532ef20700ba5"
+    },
+    {
+      "path": "结果/图预览/fig03_p1_C.png",
+      "bytes": 199999,
+      "sha256": "e3b119b709679ac44a2bd025d8d357e364b2b8c6059c6c969723e97ed322ad61"
+    },
+    {
+      "path": "结果/图预览/fig04_convergence.png",
+      "bytes": 94862,
+      "sha256": "a839d800129a33eba016b68cf5f4570b245773037612f721faaf1cccdbf35908"
+    },
+    {
+      "path": "结果/图预览/fig05_p2.png",
+      "bytes": 154367,
+      "sha256": "bbfdf8ab8714501a8f638d7c4ac22c24d35525e4ed9745cb5391e16f9d1dbfe8"
+    },
+    {
+      "path": "结果/图预览/fig06_p3.png",
+      "bytes": 142877,
+      "sha256": "ec9507aa87fa19255953d4da97f2b73a619982c3bb30510a9f57dd5f66513b0f"
+    },
+    {
+      "path": "结果/图预览/fig07_p4.png",
+      "bytes": 124463,
+      "sha256": "c16884a540b95c3cfb6b43002b021433bef4521678c58564637d853807f9a6c4"
+    },
+    {
+      "path": "结果/图预览/fig08_compare34.png",
+      "bytes": 76422,
+      "sha256": "0f502713da483bd6985c5f16be5d5bc004d54ad1655db3dc8f90d56b3fa6e334"
+    },
+    {
+      "path": "结果/图预览/fig09_sensitivity.png",
+      "bytes": 72524,
+      "sha256": "e74343a08b206af2374f24d9089ba1d9954cd986ba207ee2663a462ed2dbb7ca"
+    },
+    {
+      "path": "结果/灵敏度分析.md",
+      "bytes": 1530,
+      "sha256": "5e27f3fe5fa6d07128bfbff84b45fc26e738ab21e3fa469410a13b88c2e3c1fc"
+    },
+    {
+      "path": "附件/附件1.xlsx",
+      "bytes": 16586,
+      "sha256": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7"
+    },
+    {
+      "path": "附件/附件2.xlsx",
+      "bytes": 11485,
+      "sha256": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af"
+    },
+    {
+      "path": "附件/附件3/result1.xlsx",
+      "bytes": 10073,
+      "sha256": "23b261b295c1b787d000eebbca6521c37075107b6fcf78724f8d395ce1798ff4"
+    },
+    {
+      "path": "附件/附件3/result2.xlsx",
+      "bytes": 10073,
+      "sha256": "23b261b295c1b787d000eebbca6521c37075107b6fcf78724f8d395ce1798ff4"
+    },
+    {
+      "path": "附件/附件3/result3.xlsx",
+      "bytes": 9345,
+      "sha256": "07e4793d620a7f899804c0298d49a16a197960440fd47f8bb780c57ec27e2859"
+    },
+    {
+      "path": "附件/附件3/result4.xlsx",
+      "bytes": 9351,
+      "sha256": "86e9300ffa3d30c43de895ea6723da943e85b8740b137bcae5af7107f076eeac"
+    }
+  ]
+}
