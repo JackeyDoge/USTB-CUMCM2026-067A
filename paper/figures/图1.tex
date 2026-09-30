@@ -1,0 +1,44 @@
+% 图1：与图5统一浅灰填充、宋体字号、圆角和箭头样式。
+% 虚线表示各问模型的逐步扩展，不表示初始状态的传递。
+\begin{tikzpicture}[
+  box/.style={draw,rounded corners=2pt,fill=black!3,align=center,
+    minimum height=1.05cm,inner sep=5pt,font=\small},
+  task/.style={box,text width=3.05cm,minimum height=2.55cm},
+  flow/.style={-{Stealth[length=2mm]},semithick},
+  connector/.style={semithick},
+  every node/.append style={font=\small}
+]
+  \node[box,text width=8.0cm] (input) at (0,0)
+    {烘干条件与药材参数\\整理温湿记录、物性关系和半径变化};
+  \node[box,text width=14.45cm] (model) at (0,-1.5)
+    {建立径向传热传质模型\\结合中心对称与表面交换条件，用有限体积法求解};
+
+  \node[task] (p1) at (-5.7,-3.95)
+    {问题一\\[4pt]分析预热过程\\采用常热物性\\
+     分别求解温湿场\\给出前30分钟分布};
+  \node[task] (p2) at (-1.9,-3.95)
+    {问题二\\[4pt]分析全程温湿变化\\计入物性变化\\
+     联立求解温湿场\\给出前3小时分布};
+  \node[task] (p3) at (1.9,-3.95)
+    {问题三\\[4pt]确定烘干时间\\沿用问题二模型\\
+     检查最大含水率\\求得整体达标时刻};
+  \node[task] (p4) at (5.7,-3.95)
+    {问题四\\[4pt]考虑药材收缩\\由记录确定半径\\
+     转至物质坐标求解\\计算所需烘干时间};
+
+  \node[box,text width=14.45cm] (check) at (0,-6.4)
+    {检验结果并分析误差\\与半解析解对照，检查网格与步长影响，考察参数变化};
+
+  \draw[flow] (input.south) -- (model.north);
+  \draw[connector] (model.south) -- (0,-2.32);
+  \draw[connector] (-5.7,-2.32) -- (5.7,-2.32);
+  \foreach \x/\p in {-5.7/p1,-1.9/p2,1.9/p3,5.7/p4} {
+    \draw[flow] (\x,-2.32) -- (\p.north);
+    \draw[connector] (\p.south) -- (\x,-5.6);
+  }
+  \draw[connector] (-5.7,-5.6) -- (5.7,-5.6);
+  \draw[flow] (0,-5.6) -- (check.north);
+  \draw[flow,dashed] (p1.east) -- (p2.west);
+  \draw[flow,dashed] (p2.east) -- (p3.west);
+  \draw[flow,dashed] (p3.east) -- (p4.west);
+\end{tikzpicture}

@@ -1,0 +1,94 @@
+% 6.2：与code/p23.py的双场中点Picard迭代一致；沿用既有生产结果，未重算PDE。
+\subsection{模型求解}
+\label{sec:p2-solution}
+
+空间离散沿用问题一的有限体积法，时间推进沿用式\eqref{eq:p1-time}。
+通过双场Picard迭代，在每个时间步内同步确定两场及其物性。
+
+\subsubsection{中点物性下的双场同步迭代}
+
+设$\Delta t_n=t^{n+1}-t^n$，已知第$n$层的$\boldsymbol T^n$、$\boldsymbol C^n$。
+以旧层解作为新层初始估计，即
+$\boldsymbol T^{n+1,(0)}=\boldsymbol T^n$、
+$\boldsymbol C^{n+1,(0)}=\boldsymbol C^n$。
+第$\ell$轮由当前估计构造同一时间中点的状态
+\begin{equation}
+  \widetilde T_i^{(\ell)}
+    =\frac{T_i^n+T_i^{n+1,(\ell)}}{2},\qquad
+  \widetilde C_i^{(\ell)}
+    =\frac{C_i^n+C_i^{n+1,(\ell)}}{2}.
+  \label{eq:p2-midpoint}
+\end{equation}
+将其代入式\eqref{eq:p2-properties}，计算节点导热系数
+$k_i^{(\ell)}=k(\widetilde C_i^{(\ell)})$和扩散系数
+$D_i^{(\ell)}=D(\widetilde C_i^{(\ell)},\widetilde T_i^{(\ell)}+273.15)$。
+按式\eqref{eq:p1-fvm-coefficients}取相邻节点物性的算术平均，
+分别得到温度场、水分场的面导通系数$G_{T,i+1/2}^{(\ell)}$、
+$G_{C,i+1/2}^{(\ell)}$；两场对应的时间项系数为
+\begin{equation}
+  m_{T,i}^{(\ell)}
+    =\frac{\rho(\widetilde C_i^{(\ell)})
+       c_p(\widetilde C_i^{(\ell)})V_i}{\Delta t_n},
+  \qquad
+  m_{C,i}=\frac{V_i}{\Delta t_n}.
+  \label{eq:p2-time-coefficients}
+\end{equation}
+
+将上述系数及$B_T=R_0h$、$B_C=R_0h_m$分别代入式\eqref{eq:p1-linear-system}，
+组装两场的三对角系统；本轮新、旧层通量使用同一组固定的面系数，
+步首、步末环境值按式\eqref{eq:p1-surface-row}加权进入右端。
+
+每轮以同一组中点物性分别求解两场，两场解出后同步更新式\eqref{eq:p2-midpoint}。
+仅当两场同时满足式\eqref{eq:picard-tolerance}时才接受时间步，
+迭代上限为30轮，超限则报告未收敛。
+全程仅最初两步取$\theta=1$作隐式启动，其余取$\theta=1/2$，
+物性均按中点状态计算。
+
+\subsubsection{数值实现与计算结果}
+
+线性求解器沿用第\ref{sec:p1-solution}节的设置。
+采用同一882节点网格及外侧$0.5\ \mathrm{mm}$加密区域，
+前$60\ \mathrm{s}$取$\Delta t_n=0.03125\ \mathrm{s}$，
+此后取$0.25\ \mathrm{s}$推进至$10800\ \mathrm{s}$。
+每隔$1\ \mathrm{s}$在$r=0,0.1,\ldots,2.0\ \mathrm{cm}$处提取两场结果，
+以四位小数保存至\texttt{result2.xlsx}；题目指定的结果列于表\ref{tab:p2T}、表\ref{tab:p2C}。
+
+\begin{table}[!htbp]
+  \centering
+  \caption{3小时内药材的温度（单位：$^{\circ}\mathrm{C}$）}
+  \label{tab:p2T}
+  \begin{tabularx}{\textwidth}{@{}YYYYYY@{}}
+    \toprule
+    \multirow{2}{*}{时间/$\mathrm{h}$}&\multicolumn{5}{c}{到药材中心的距离/$\mathrm{cm}$}\\
+    \cmidrule(lr){2-6}
+    &0&0.5&1&1.5&2\\
+    \midrule
+    0.5 &32.1892&32.3821&32.9659&33.9608&35.4130\\
+    1.0 &40.3816&40.5536&41.0605&41.8782&42.9976\\
+    1.5 &45.8468&45.9348&46.1930&46.6051&47.1401\\
+    2.0 &48.4502&48.4881&48.5984&48.7736&49.0033\\
+    2.5 &49.4670&49.4792&49.5136&49.5653&49.6609\\
+    3.0 &49.8495&49.8553&49.8746&49.9101&49.9664\\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htbp]
+  \centering
+  \caption{3小时内药材的水分浓度（单位：$\mathrm{kg/kg}$）}
+  \label{tab:p2C}
+  \begin{tabularx}{\textwidth}{@{}YYYYYY@{}}
+    \toprule
+    \multirow{2}{*}{时间/$\mathrm{h}$}&\multicolumn{5}{c}{到药材中心的距离/$\mathrm{cm}$}\\
+    \cmidrule(lr){2-6}
+    &0&0.5&1&1.5&2\\
+    \midrule
+    0.5 &2.5499&2.5489&2.5256&2.3257&1.6486\\
+    1.0 &2.5257&2.4948&2.3578&2.0230&1.4711\\
+    1.5 &2.3861&2.3256&2.1344&1.8020&1.3476\\
+    2.0 &2.1709&2.1084&1.9236&1.6259&1.2311\\
+    2.5 &1.9566&1.9006&1.7360&1.4720&1.1166\\
+    3.0 &1.7662&1.7165&1.5702&1.3333&1.0081\\
+    \bottomrule
+  \end{tabularx}
+\end{table}

@@ -1,0 +1,67 @@
+% 7.2：沿用既有生产解；全域控制位置核验及事件定位与code/p23.py一致。
+\subsection{模型求解}
+\label{sec:p3-solution}
+
+\subsubsection{时间推进与临界时刻定位}
+
+前$3\ \mathrm{h}$沿用第\ref{sec:p2-solution}节的数值设置，
+此后取$\Delta t_n=1\ \mathrm{s}$，网格、双场迭代与时间格式不变，
+全程仍仅最初两步作隐式启动。
+
+每步收敛后，在全部计算节点上求
+$C_{\max}^{n}=\max_{0\le i\le N}C_i^{n}$，
+并与中心含水率比较。
+全过程核验表明，二者之差始终不超过$10^{-12}\cunit$，
+故本次计算中可用中心含水率定位全域达标时刻。
+当首次出现$C_{\max}^{n}\ge C_*>C_{\max}^{n+1}$时，认为在该区间内水分浓度持续减小，
+临界时刻位于$[t^n,t^{n+1})$内。
+对该步的未舍入结果作线性插值，得到
+\begin{equation}
+\begin{gathered}
+  \lambda=\frac{C_{\max}^{n}-C_*}
+                 {C_{\max}^{n}-C_{\max}^{n+1}},
+  \qquad t_*\approx t^n+\lambda\Delta t_n,\\
+  \boldsymbol C(t_*)\approx
+    (1-\lambda)\boldsymbol C^n+\lambda\boldsymbol C^{n+1}.
+\end{gathered}
+\label{eq:p3-event-interpolation}
+\end{equation}
+该式同时给出临界时刻及径向含水率分布，规定的$60\ \mathrm{s}$间隔仅用于结果采样。
+
+\subsubsection{烘干时长与计算结果}
+
+计算得到，在前述环境延拓条件下，临界烘干时间为
+\begin{equation*}
+  \boxed{t_*\approx57.4721\ \mathrm{h}}.
+\end{equation*}
+每隔$6\ \mathrm{h}$提取$r=0,0.5,1,1.5,2\ \mathrm{cm}$处的含水率，
+并由式\eqref{eq:p3-event-interpolation}补充临界时刻的分布，结果见表\ref{tab:p3C}。
+
+\begin{table}[!htbp]
+  \centering
+  \caption{药材烘干过程的水分浓度（单位：$\mathrm{kg/kg}$）}
+  \label{tab:p3C}
+  \begin{tabularx}{\textwidth}{@{}C{0.22\textwidth}YYYYY@{}}
+    \toprule
+    \multirow{2}{*}{时间/$\mathrm{h}$}&\multicolumn{5}{c}{到药材中心的距离/$\mathrm{cm}$}\\
+    \cmidrule(lr){2-6}
+    &0&0.5&1&1.5&2\\
+    \midrule
+    6  &1.0170&0.9881&0.9015&0.7550&0.5328\\
+    12 &0.4561&0.4432&0.4031&0.3297&0.1642\\
+    18 &0.2988&0.2915&0.2687&0.2253&0.0845\\
+    24 &0.2378&0.2327&0.2167&0.1855&0.0665\\
+    30 &0.2058&0.2018&0.1892&0.1641&0.0598\\
+    36 &0.1859&0.1825&0.1718&0.1504&0.0566\\
+    42 &0.1721&0.1691&0.1597&0.1407&0.0549\\
+    48 &0.1618&0.1592&0.1507&0.1334&0.0537\\
+    54 &0.1539&0.1514&0.1436&0.1277&0.0530\\
+    \mbox{\textbf{57.4721（结束）}}
+       &\textbf{0.1500}&\textbf{0.1477}&\textbf{0.1402}&\textbf{0.1249}&\textbf{0.0527}\\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+表末行为$C_{\max}=C_*$的临界状态；继续推进至其后的首个整分钟\textbf{$206940\ \mathrm{s}$}，
+此时未舍入的$C_{\max}<C_*$。
+全程每隔$60\ \mathrm{s}$、径向每隔$0.1\ \mathrm{cm}$采样，以四位小数写入\texttt{result3.xlsx}。

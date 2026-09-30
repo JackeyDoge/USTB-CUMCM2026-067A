@@ -1,0 +1,100 @@
+% Replot Figure 8(b) with the original curves and measured radius samples.
+% Build from paper/figures after running code/export_figure8b_data.py.
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{pgfplots}
+\setmainfont{Times New Roman}
+\setCJKmainfont{SimSun}
+\pgfplotsset{compat=1.18}
+\definecolor{RadiusGreen}{HTML}{009E73}
+\definecolor{MeanBlue}{HTML}{56B4E9}
+\definecolor{ReferenceGray}{HTML}{666666}
+\input{fig08b_endpoint.tex}
+\pgfplotsset{
+  original panel/.style={
+    scale only axis,
+    width=228.247788bp,height=101.988679bp,
+    xmin=0,xmax=72,
+    xtick={0,20,40,60},xticklabels={0,20,40,60},
+    axis lines=box,
+    axis line style={black,line width=0.8bp},
+    tick align=outside,
+    xtick pos=bottom,ytick pos=left,
+    tick style={black,line width=0.8bp},
+    major tick length=3.5bp,
+    tick label style={font=\fontsize{10.5}{12}\selectfont},
+    label style={font=\fontsize{11.4}{13}\selectfont},
+    grid=major,
+    grid style={draw=black!15,line width=0.5bp},
+    axis background/.style={fill=white},
+    scaled ticks=false,
+    clip=true,
+    clip marker paths=true,
+  },
+}
+\begin{document}
+\begin{tikzpicture}[x=1bp,y=1bp]
+  % The former 600 dpi export was 2391 x 2298 px. Keep that same canvas.
+  \path[use as bounding box] (0,0) rectangle (286.92,275.76);
+  \begin{pgfinterruptboundingbox}
+    \begin{axis}[
+      original panel,
+      at={(51.450962bp,151.633821bp)},anchor=south west,
+      ymin=1.1579,ymax=2.0401,
+      ytick={1.25,1.50,1.75,2.00},
+      yticklabels={1.25,1.50,1.75,2.00},
+      xticklabels={},
+      ylabel={半径(cm)},
+      ylabel style={at={(axis description cs:-0.145,0.5)},anchor=south},
+      legend style={
+        at={(0.985,0.975)},anchor=north east,
+        fill=white,fill opacity=1,text opacity=1,draw=none,
+        font=\fontsize{8.4}{9.7}\selectfont,
+        inner sep=1bp,row sep=0.5bp,
+      },
+      % Shorter samples keep the entire white legend to the right of the endpoint.
+      legend image code/.code={
+        \draw[#1,mark repeat=2,mark phase=2]
+          plot coordinates {(0bp,0bp) (5bp,0bp) (10bp,0bp)};
+      },
+      legend cell align=left,
+    ]
+      \addplot[ReferenceGray,line width=1.1bp,densely dotted,forget plot]
+        coordinates {(\DryingEndHour,1.1579) (\DryingEndHour,2.0401)};
+      \addplot[only marks,mark=o,mark size=1.6bp,
+        mark options={draw=black!80,fill=white,line width=0.8bp}]
+        table[x=time,y=radius] {fig08b_measurements.dat};
+      \addlegendentry{附件2实测}
+      \addplot[RadiusGreen,line width=1.8bp]
+        table[x=time,y=radius] {fig08b_curves.dat};
+      \addlegendentry{插值 R(t)}
+      \node[anchor=north east,align=center,inner sep=1bp,fill=white,
+        font=\fontsize{8.5}{10}\selectfont]
+        at (axis cs:49.5,1.75) {烘干结束\\51.09小时};
+    \end{axis}
+    \node[anchor=base west,inner sep=0pt,
+      font=\fontsize{11.4}{13}\selectfont]
+      at (51.450962,261.0) {(b) 半径收缩与平均含水率};
+    \begin{axis}[
+      original panel,
+      at={(51.450962bp,37.4065bp)},anchor=south west,
+      ymin=-0.0026577835112786,ymax=2.660457670556573,
+      ytick={0,1,2},yticklabels={0,1,2},
+      ylabel={平均含水率(kg/kg)},
+      ylabel style={at={(axis description cs:-0.145,0.5)},anchor=south},
+      xlabel={时间(h)},
+      xlabel style={at={(axis description cs:0.5,-0.13)},anchor=north},
+    ]
+      \addplot[ReferenceGray,line width=1.1bp,densely dotted]
+        coordinates {(\DryingEndHour,-0.0026577835112786)
+          (\DryingEndHour,2.660457670556573)};
+      \addplot[MeanBlue,line width=1.8bp]
+        table[x=time,y=mean] {fig08b_curves.dat};
+      \node[anchor=north east,align=center,inner sep=1bp,fill=white,
+        font=\fontsize{8.5}{10}\selectfont]
+        at (axis cs:49.5,1.30) {烘干结束\\51.09小时};
+    \end{axis}
+  \end{pgfinterruptboundingbox}
+\end{tikzpicture}
+\end{document}

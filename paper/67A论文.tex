@@ -1,0 +1,56 @@
+% !TEX program = xelatex
+% Compile 67A论文.tex from paper/; all current edits are in the included section files.
+\documentclass[withoutpreface,bwprint]{cumcmthesis}
+\usepackage{cumcm2026}
+\usepackage[section]{placeins}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\setmonofont{Consolas}
+\setCJKmonofont[AutoFakeBold=2]{SimSun}
+\setCJKfamilyfont{zhhei}[AutoFakeBold=2]{SimHei}
+\setCJKfamilyfont{zhsong}[AutoFakeBold=2]{SimSun}
+\xeCJKDeclareCharClass{CJK}{"2103,"2208}
+% 正文统一使用三级自动编号；小节内部标题采用无星号的 \subsubsection。
+\setcounter{secnumdepth}{3}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\graphicspath{{figures/}}
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+\newcommand{\tempunit}{\ensuremath{\,{}^{\circ}\mathrm{C}}}
+\newcommand{\cunit}{\ensuremath{\,\mathrm{kg/kg}}}
+\newcommand{\norminf}[1]{\left\lVert#1\right\rVert_{\infty}}
+% 图表在本节内自然浮动，由大节边界控制归属。
+\newcommand{\pfig}[4]{\begin{figure}[!htbp]\centering\includegraphics[width=#2\textwidth]{#1}\caption{#3}\label{#4}\end{figure}}
+\renewcommand{\arraystretch}{1.18}
+\setlength{\tabcolsep}{6pt}
+\setlength{\emergencystretch}{2em}
+\hypersetup{hidelinks,pdfauthor={}}
+\makeatletter
+\renewcommand{\mcm@cap@keywordsname}{关键词}
+% 摘要独立成页；去掉模板在正文页首插入的空行，保持正文自然接排。
+\renewcommand{\endabstract}{\if@twocolumn\else\endquotation\newpage\fi}
+\makeatother
+\title{基于热质耦合与收缩动边界的药材烘干过程预测}
+\begin{document}
+\maketitle
+\input{sec/摘要}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\titleformat{\section}{\normalfont\centering\zihao{3}\bfseries}{\thesection}{0pt}{}
+\input{论文正文}
+\CumcmAIUsed{模型建立与数值求解辅助、公式与程序核对、结果分析及论文文本起草、文献信息核验、图表绘制和\LaTeX{}排版}
+\begin{thebibliography}{9}
+\bibitem{heat} 陶文铨. 传热学[M]. 5版. 北京：高等教育出版社，2019.
+\bibitem{fick} Fick A. On liquid diffusion[J]. The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science, 1855, 10(63): 30--39. DOI: \href{https://doi.org/10.1080/14786445508641925}{10.1080/14786445508641925}.
+\bibitem{num} 李庆扬，王能超，易大义. 数值分析[M]. 5版. 北京：清华大学出版社，2008.
+\bibitem{nht} 陶文铨. 数值传热学[M]. 2版. 西安：西安交通大学出版社，2001.
+\bibitem{cn} Crank J, Nicolson P. A practical method for numerical evaluation of solutions of partial differential equations of the heat-conduction type[J]. Mathematical Proceedings of the Cambridge Philosophical Society, 1947, 43(1): 50--67. DOI: \href{https://doi.org/10.1017/S0305004100023197}{10.1017/S0305004100023197}.
+\bibitem{porous-drying} 王会林，卢涛，姜培学. 生物多孔介质热风干燥数学模型及数值模拟[J]. 农业工程学报，2014，30(20)：325--333. DOI: \href{https://doi.org/10.3969/j.issn.1002-6819.2014.20.039}{10.3969/j.issn.1002-6819.2014.20.039}.
+\bibitem{radish-shrinkage} 吴孟秋，雷登文，朱广飞，等. 基于动网格的白萝卜热风干燥热质传递研究[J]. 农业机械学报，2022，53(S2)：293--302. DOI: \href{https://doi.org/10.6041/j.issn.1000-1298.2022.S2.034}{10.6041/j.issn.1000-1298.2022.S2.034}.
+\bibitem{mms-verification} 王年华，张来平，赵钟，等. 基于制造解的非结构二阶有限体积离散格式的精度测试与验证[J]. 力学学报，2017，49(3)：627--637. DOI: \href{https://doi.org/10.6052/0459-1879-16-260}{10.6052/0459-1879-16-260}.
+\end{thebibliography}
+\label{maintextend}
+\titleformat{\section}{\normalfont\centering\zihao{3}\bfseries}{\thesection}{0.8em}{}
+\input{论文附录}
+\end{document}

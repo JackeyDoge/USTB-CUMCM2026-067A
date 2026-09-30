@@ -1,0 +1,215 @@
+{
+  "mode": "read-only checks; no solving, no output regeneration, no audit.main()",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "dependencies": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scipy": "1.18.1",
+    "openpyxl": "3.1.5",
+    "matplotlib": "3.11.1"
+  },
+  "syntax_checked": [
+    "code\\audit.py",
+    "code\\common.py",
+    "code\\export_figure2_data.py",
+    "code\\export_figure8b_data.py",
+    "code\\figures.py",
+    "code\\p1.py",
+    "code\\p23.py",
+    "code\\p4.py",
+    "code\\sensitivity.py",
+    "code\\verify.py"
+  ],
+  "workbooks": {
+    "1": {
+      "sheets": {
+        "温度": {
+          "rows": 1800,
+          "last_time_s": 1800
+        },
+        "水分浓度": {
+          "rows": 1800,
+          "last_time_s": 1800
+        }
+      },
+      "checked_values": 75600
+    },
+    "2": {
+      "sheets": {
+        "温度": {
+          "rows": 10800,
+          "last_time_s": 10800
+        },
+        "水分浓度": {
+          "rows": 10800,
+          "last_time_s": 10800
+        }
+      },
+      "checked_values": 453600
+    },
+    "3": {
+      "sheets": {
+        "Sheet1": {
+          "rows": 3449,
+          "last_time_s": 206940
+        }
+      },
+      "checked_values": 72429
+    },
+    "4": {
+      "sheets": {
+        "Sheet1": {
+          "rows": 3066,
+          "last_time_s": 183960
+        }
+      },
+      "checked_values": 44287
+    }
+  },
+  "field_checks": {
+    "1": {
+      "C_range": [
+        1.5102371186340349,
+        2.550000000000001
+      ],
+      "T_range": [
+        27.99999999999977,
+        36.78556005960356
+      ]
+    },
+    "2": {
+      "C_range": [
+        1.0081228303628094,
+        2.5500000000000096
+      ],
+      "T_range": [
+        27.99999999999982,
+        49.96641291091875
+      ]
+    },
+    "3": {
+      "C_range": [
+        0.05265855293466261,
+        2.5500000000000083
+      ],
+      "T_range": [
+        28.000000030494984,
+        50.03986674534294
+      ],
+      "last_center_below_threshold": true
+    },
+    "4": {
+      "C_range": [
+        0.052618956944978465,
+        2.550000000000019
+      ],
+      "last_center_below_threshold": true
+    }
+  },
+  "inputs": {
+    "附件\\附件1.xlsx": {
+      "Sheet1": {
+        "rows": 242,
+        "columns": 3
+      }
+    },
+    "附件\\附件2.xlsx": {
+      "Sheet1": {
+        "rows": 146,
+        "columns": 2
+      }
+    },
+    "附件\\附件3\\result1.xlsx": {
+      "温度": {
+        "rows": 5,
+        "columns": 6
+      },
+      "水分浓度": {
+        "rows": 5,
+        "columns": 6
+      }
+    },
+    "附件\\附件3\\result2.xlsx": {
+      "温度": {
+        "rows": 5,
+        "columns": 6
+      },
+      "水分浓度": {
+        "rows": 5,
+        "columns": 6
+      }
+    },
+    "附件\\附件3\\result3.xlsx": {
+      "Sheet1": {
+        "rows": 5,
+        "columns": 6
+      }
+    },
+    "附件\\附件3\\result4.xlsx": {
+      "Sheet1": {
+        "rows": 5,
+        "columns": 6
+      }
+    }
+  },
+  "historical_paper_tables": {
+    "p1T": 7,
+    "p1C": 7,
+    "p2T": 6,
+    "p2C": 6,
+    "p3": 10,
+    "p4": 9
+  },
+  "table_check_scope": "The existing audit checks paper/body.tex historical tables, not the current paper/sec/ text.",
+  "checked_workbook_values_total": 645916,
+  "source_and_results_unchanged": true,
+  "files_hash_checked": 44,
+  "sha256": {
+    "code\\audit.py": "8b8eb5e4bd1f2b7d2facbdca7da39366954e2476abfa73dcf60fa52e24866b65",
+    "code\\common.py": "4138e1facfa56a3c01eba9a69dbd4c9db041500de2bd38048f79ed68cce00495",
+    "code\\export_figure2_data.py": "5c8f427c5490b040bf2fe4bff38bc8d37691503e745212fe71afb7ba63514e4c",
+    "code\\export_figure8b_data.py": "65856a464527a0b852b8b622b2edf79930342fb0dee9df2ddf9451d4855cbd0b",
+    "code\\figures.py": "44f744d431947bdd6747757f3ca8f136156b0de206f95cecf6582ea61153434c",
+    "code\\p1.py": "4a3524f2b8c0dfd86f8b16f967d3b10894e67f92db00d896c64b2d3e14296d70",
+    "code\\p23.py": "e8968e60cf446d252b06f0356984783e61935e959e9ba7d4ca9061cf501d7dcc",
+    "code\\p4.py": "7e6964ed3119f4a7bce09ad10252747fac83c007a6db8d1bdd3d6490d5968b21",
+    "code\\sensitivity.py": "8751afb655eb2f684d9d7b2721223180a913caa4eaf79b04596624c5fab58f44",
+    "code\\verify.py": "b370833777e9c6ea49c033fa6a1b24149cff149d38d5138657832a0f86cbe828",
+    "结果\\audit_report.json": "18302c05a3b6c5409f8b1819150aacdb3c31e90b51e59e6b31e40a13abf22563",
+    "结果\\p1_field.npz": "b6564c9f1f1c163f97d30fc0d8f2108376f05112788cb9c444a38ab42693a89d",
+    "结果\\p1_检验数据.md": "a38175d78699970bfcf0dc59dcb0cd8aa0e6df082c5f395384df179083df355b",
+    "结果\\p1_论文表格.md": "80c6f3e3d8ec4f90d6910fec0ad77779ed65e7b07143efa793bf3eb7a658cef1",
+    "结果\\p2_field.npz": "7d912f898dd61f295de5e80938cfcc39544f4de122ebec73f26e8580d3b3b51f",
+    "结果\\p2_检验数据.md": "05c0b059b97c6f1bcbb29a0c953b458848c38b8726c450b20d39af879977945e",
+    "结果\\p2_论文表格.md": "2d309bb34291238ddd0aee12ae43275bdff105ae4568ffcfe6a1473cb46dee3c",
+    "结果\\p3_field.npz": "7d3bb877b960182316767aea9f044e9e66c4561980ff521cf94ded5717ebecb6",
+    "结果\\p3_检验数据.md": "19e16cddb96a4b163c3cc979ace0dcd01215483fe63ace8caf218a1d987975e5",
+    "结果\\p3_论文表格.md": "ccee6a0366ec77f9843e11628fe4cd933fb2c7bde2c999c17d96b7d1ac8fb7a9",
+    "结果\\p4_field.npz": "c60480ff90e399ad4502089f47cdc3ad063848cdac392710e92240384bf63f1c",
+    "结果\\p4_检验数据.md": "3a0a95e1c82e2bffddb35c8fe7b12266c311f9fde9ac9d1e814511d04459741e",
+    "结果\\p4_论文表格.md": "4d7455f2b4fddacca9523fe86ce99b397447ae4771fb485dab73fb91dd686157",
+    "结果\\result1.xlsx": "fe56dbea62f560b21cc473bba068ebe0db780459f6ee0dad6e5aae5c0c950acf",
+    "结果\\result2.xlsx": "61d44fff06aa5e72e3c9a89ab64cf6b48cdf1a9fab05a789e97ced79a6e13d92",
+    "结果\\result3.xlsx": "5ede8b76a66b95252899cf7c5e55f1d3f2c81984c9b345984a4990e068408663",
+    "结果\\result4.xlsx": "6eceb25e10da855c9a18333b6023c4995f5242fae35d5ed8c6a0124fe3c26c32",
+    "结果\\sensitivity.npz": "66b4d1ae9e0174aa0e36710394f2b0cf3fbfa0f6da40081c6772ee2f60d56738",
+    "结果\\图预览\\fig01_env.png": "e43a9815b6cf3c96023ee887baea5621d17b380562e593fcfb49b217f3abfa1c",
+    "结果\\图预览\\fig02_p1_T.png": "80e1fd7db33344816942a79d733eddc3069df875c56e86c1c7e532ef20700ba5",
+    "结果\\图预览\\fig03_p1_C.png": "e3b119b709679ac44a2bd025d8d357e364b2b8c6059c6c969723e97ed322ad61",
+    "结果\\图预览\\fig04_convergence.png": "a839d800129a33eba016b68cf5f4570b245773037612f721faaf1cccdbf35908",
+    "结果\\图预览\\fig05_p2.png": "bbfdf8ab8714501a8f638d7c4ac22c24d35525e4ed9745cb5391e16f9d1dbfe8",
+    "结果\\图预览\\fig06_p3.png": "ec9507aa87fa19255953d4da97f2b73a619982c3bb30510a9f57dd5f66513b0f",
+    "结果\\图预览\\fig07_p4.png": "c16884a540b95c3cfb6b43002b021433bef4521678c58564637d853807f9a6c4",
+    "结果\\图预览\\fig08_compare34.png": "0f502713da483bd6985c5f16be5d5bc004d54ad1655db3dc8f90d56b3fa6e334",
+    "结果\\图预览\\fig09_sensitivity.png": "e74343a08b206af2374f24d9089ba1d9954cd986ba207ee2663a462ed2dbb7ca",
+    "结果\\灵敏度分析.md": "5e27f3fe5fa6d07128bfbff84b45fc26e738ab21e3fa469410a13b88c2e3c1fc",
+    "附件\\附件1.xlsx": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7",
+    "附件\\附件2.xlsx": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af",
+    "附件\\附件3\\result1.xlsx": "23b261b295c1b787d000eebbca6521c37075107b6fcf78724f8d395ce1798ff4",
+    "附件\\附件3\\result2.xlsx": "23b261b295c1b787d000eebbca6521c37075107b6fcf78724f8d395ce1798ff4",
+    "附件\\附件3\\result3.xlsx": "07e4793d620a7f899804c0298d49a16a197960440fd47f8bb780c57ec27e2859",
+    "附件\\附件3\\result4.xlsx": "86e9300ffa3d30c43de895ea6723da943e85b8740b137bcae5af7107f076eeac"
+  },
+  "status": "passed"
+}

@@ -1,0 +1,171 @@
+{
+  "workbooks": {
+    "1": {
+      "sheets": {
+        "温度": {
+          "rows": 1800,
+          "last_time_s": 1800
+        },
+        "水分浓度": {
+          "rows": 1800,
+          "last_time_s": 1800
+        }
+      },
+      "checked_values": 75600
+    },
+    "2": {
+      "sheets": {
+        "温度": {
+          "rows": 10800,
+          "last_time_s": 10800
+        },
+        "水分浓度": {
+          "rows": 10800,
+          "last_time_s": 10800
+        }
+      },
+      "checked_values": 453600
+    },
+    "3": {
+      "sheets": {
+        "Sheet1": {
+          "rows": 3449,
+          "last_time_s": 206940
+        }
+      },
+      "checked_values": 72429
+    },
+    "4": {
+      "sheets": {
+        "Sheet1": {
+          "rows": 3066,
+          "last_time_s": 183960
+        }
+      },
+      "checked_values": 44287
+    }
+  },
+  "recomputed": {
+    "1": {
+      "max_abs_difference": {
+        "T": 0.0,
+        "C": 0.0
+      },
+      "seconds": 13.80069100000037,
+      "picard_max": 2,
+      "mass_equation_residual": 9.711315782716362e-14
+    },
+    "2": {
+      "max_abs_difference": {
+        "T": 0.0,
+        "C": 0.0
+      },
+      "seconds": 11.89303959999961,
+      "picard_max": 2,
+      "mass_equation_residual": 5.260506423167413e-13
+    },
+    "3": {
+      "max_abs_difference": {
+        "T": 0.0,
+        "C": 0.0
+      },
+      "seconds": 43.1412350999999,
+      "picard_max": 2,
+      "mass_equation_residual": 1.7840440453918338e-12,
+      "t_dry_h": 57.47209319325385,
+      "event_difference_s": 0.0,
+      "center_is_max": true
+    },
+    "4": {
+      "max_abs_difference": {
+        "C": 0.0,
+        "Csurf": 0.0,
+        "meanC": 0.0,
+        "Rsamp": 0.0
+      },
+      "seconds": 46.812565500000346,
+      "picard_max": 3,
+      "mass_equation_residual": 4.111710291149988e-14,
+      "t_dry_h": 51.09052943545497,
+      "event_difference_s": 0.0,
+      "center_is_max": true
+    }
+  },
+  "paper_tables": {
+    "p1T": 7,
+    "p1C": 7,
+    "p2T": 6,
+    "p2C": 6,
+    "p3": 10,
+    "p4": 9
+  },
+  "drying": {
+    "p3_h": 57.47209319325385,
+    "p4_h": 51.09052943545497,
+    "difference_h": 6.381563757798875,
+    "p3_last_center": 0.14998821529917677,
+    "p4_last_center": 0.1499824963116209
+  },
+  "independent": {
+    "temperature_semianalytic": {
+      "max": 1.6801462372484366e-06,
+      "mean": 3.1131066881317883e-07,
+      "at": [
+        300,
+        2.0
+      ]
+    },
+    "tridiagonal_difference": 2.220446049250313e-16,
+    "manufactured_solution": {
+      "errs": [
+        3.327564219879342e-05,
+        8.346328115749202e-06,
+        2.0881816178430768e-06
+      ],
+      "orders": [
+        1.9952529666023404,
+        1.9988944432355897
+      ]
+    }
+  },
+  "field_checks": {
+    "1": {
+      "C_range": [
+        1.5102371186340349,
+        2.550000000000001
+      ],
+      "T_range": [
+        27.99999999999977,
+        36.78556005960356
+      ]
+    },
+    "2": {
+      "C_range": [
+        1.0081228303628094,
+        2.5500000000000096
+      ],
+      "T_range": [
+        27.99999999999982,
+        49.96641291091875
+      ]
+    },
+    "3": {
+      "C_range": [
+        0.05265855293466261,
+        2.5500000000000083
+      ],
+      "T_range": [
+        28.000000030494984,
+        50.03986674534294
+      ],
+      "last_center_below_threshold": true
+    },
+    "4": {
+      "C_range": [
+        0.052618956944978465,
+        2.550000000000019
+      ],
+      "last_center_below_threshold": true
+    }
+  }
+}

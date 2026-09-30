@@ -1,0 +1,132 @@
+\section{问题重述}
+\subsection{问题背景}
+热风干燥通过烘房与药材之间的热量交换促进水分排出，是药材加工中的重要环节。作业通常经历升温预热和持续干燥两个阶段，温湿环境的设置及持续时间会影响脱水效率、能源消耗与成品状态。因此，需要掌握药材内部温度和水分的演化规律，为干燥进程控制和结束时间的判断提供依据。
+
+药材内部的传热与水分迁移并不同步，表面和中心可能处于不同的干燥状态。随着水分减少，材料物性和外形尺寸也会变化，增加了过程预测的难度。依靠多次试验比较工况需要较多时间和成本，结合环境记录及材料参数建立数学模型，有助于分析局部温湿变化与整体干燥程度之间的关系。
+
+\subsection{问题提出}
+研究对象为一根初始长度0.25 m、半径0.02 m的圆柱形药材，初始温度为28\tempunit，干基含水率为2.55\cunit。附件1提供烘房环境随时间的记录，附件2给出药材半径的变化，各问所需热物性和扩散系数由相应附录给定。根据这些已知条件，需要完成以下四项任务。
+
+\textbf{问题一：}采用附录2的参数，描述预热阶段药材内部温度与含水率的变化。计算前30 min的径向分布，在指定时刻和位置列示结果，并以1 s的时间间隔、0.1 cm的径向间隔保存完整数据。
+
+\textbf{问题二：}统一采用附录3中随状态变化的物性关系，建立覆盖整个烘干过程的温湿变化模型。给出前3 h内每隔0.5 h、径向每隔0.5 cm的温度与含水率，同时按1 s和0.1 cm的间隔记录该时段的完整结果。
+
+\textbf{问题三：}在问题二的条件下，以药材所有位置的含水率均小于0.15\cunit 为要求，确定所需烘干时间。每隔6 h展示径向间隔0.5 cm的含水率，补充结束时刻的分布，并按60 s和0.1 cm的间隔保存干燥历程。
+
+\textbf{问题四：}考虑药材失水后的尺寸变化，结合附件2的半径记录和附录4的物性关系，重新预测达到相同含水率限值所需的时间。按问题三的时空间隔给出含水率结果，并记录实际表面状态，区分药材内部测点与收缩后已处于药材外的位置。
+
+四问结果均保留四位小数，详细数据依照附件3的模板分别写入\texttt{result1.xlsx}--\texttt{result4.xlsx}。正文表1至表6汇列各问要求的代表性时空位置结果。
+
+\newpage
+\section{模型假设}
+\begin{enumerate}[label=\arabic*、,ref=\arabic*,leftmargin=2em,labelsep=0pt,itemsep=0.5em,topsep=0.3em]
+\item\label{assumption:radial} \textbf{只考虑径向传热传质：}忽略周向差异和轴向端部效应，认为同一半径处温度与含水率相同。
+\item\label{assumption:continuum} \textbf{将药材视为连续有效介质：}不区分孔隙、液态水和水汽等微观迁移形式，其综合影响统一计入有效物性。
+\item\label{assumption:equilibrium} \textbf{将环境水分浓度视为药材表面水分变化的平衡终点：}以药材表面含水率与环境水分浓度之差作为传质驱动力。
+\item\label{assumption:sensible-heat} \textbf{忽略其他次要热效应：}不考虑辐射、化学反应、蒸发潜热及收缩做功，仅考虑热传导和表面对流换热。
+\item\label{assumption:shrinkage} \textbf{假设药材发生同源径向收缩：}问题四中药材保持圆柱形且长度不变，各物质点随半径同比例收缩。
+\end{enumerate}
+
+\section{问题分析}
+四问的区别在于模型逐步增加了什么：问题一计算预热分布，问题二引入温湿耦合，问题三增加达标判据，问题四再考虑半径收缩。图\ref{fig:framework}给出各问之间的衔接关系，具体方程与算法放在对应问题中说明。
+
+\begin{figure}[!htbp]
+\centering
+\input{figures/图1}
+\caption{药材烘干问题的总体求解框架}
+\label{fig:framework}
+\end{figure}
+
+\subsection{问题一分析}
+问题一需要研究预热阶段药材内部温度与含水率的径向分布。由于药材内部存在不可忽略的传热传质阻力，不能将其视为均匀状态，因此需分别建立径向热传导和水分扩散模型。结合题目给定的常热物性参数，采用有限体积法对空间进行离散，并逐步计算不同时间、不同位置的温度和含水率。
+
+\subsection{问题二分析}
+问题二进一步考虑物性随状态变化，使温度影响水分扩散、水分变化又反过来影响传热，原有两个独立过程转变为热质耦合过程。因此在问题一模型基础上，引入变物性关系，并在每个时间步同步更新温度、含水率及相关物性，研究前3 h内两场的共同演化。
+
+\subsection{问题三分析}
+问题三需要确定药材整体达到含水率要求的时间，其关键在于不能仅以表面或平均含水率作为判据，而应保证所有位置均低于$0.15\cunit$。因此沿用问题二的热质耦合模型继续计算，并实时跟踪全域最大含水率，通过阈值穿越确定最终烘干时刻。
+
+\subsection{问题四分析}
+问题四进一步考虑药材失水引起的尺寸收缩，使计算区域由固定区域转变为随时间变化的移动区域。为便于计算，可将变化的物理区域映射到固定坐标区间，并结合附录4的物性关系重新描述传热传质过程，最终仍以全域含水率是否达标作为烘干终点判据。
+
+\section{符号说明}
+\begingroup
+\setlength{\LTpre}{6pt}
+\setlength{\LTpost}{6pt}
+\begin{longtable*}{@{}>{\centering\arraybackslash}m{0.16\textwidth}>{\centering\arraybackslash}m{\dimexpr0.56\textwidth-4\tabcolsep\relax}>{\centering\arraybackslash}m{0.28\textwidth}@{}}
+\toprule
+符号 & 含义 & 单位\\\midrule
+\endfirsthead
+\toprule
+符号 & 含义 & 单位\\\midrule
+\endhead
+\bottomrule
+\endfoot
+$t$ & 时间 & s\\
+$r$ & 距圆柱轴线的径向距离 & m\\
+$R_0$ & 药材初始半径 & m\\
+$R(t)$ & 药材当前半径 & m\\
+$L$ & 药材长度 & m\\
+$T$ & 药材温度 & $^{\circ}$C\\
+$T_a$ & 烘房环境温度 & $^{\circ}$C\\
+$T_K$ & 药材绝对温度 & K\\
+$C$ & 药材干基含水率 & kg/kg\\
+$C_a$ & 表面传质的有效平衡含水率 & kg/kg\\
+$C_*$ & 干燥达标含水率限值 & kg/kg\\
+$\rho$ & 药材有效密度 & kg/m$^3$\\
+$c_p$ & 比热容 & J/(kg K)\\
+$k$ & 热传导系数 & W/(m K)\\
+$D$ & 有效水分扩散系数 & m$^2$/s\\
+$h$ & 表面对流换热系数 & W/(m$^2$ K)\\
+$h_m$ & 表面对流传质系数 & m/s\\
+$\xi$ & 随骨架运动的归一化径向坐标 & 1\\
+$V_i$ & 物理坐标下的径向控制体积分权重 & m$^2$\\
+$G_{i+1/2}$ & 控制面导通系数 & \shortstack{W/(m K)（传热）\\m$^2$/s（传质）}\\
+$\theta$ & 时间格式权重 & 1\\
+$\Delta t$ & 计算时间步长 & s\\
+$t_*$ & 临界达标时刻 & s\\
+$\overline C$ & 截面加权平均含水率 & kg/kg\\
+\end{longtable*}
+\addtocounter{table}{-1}% 无标题符号表不占用题目规定的结果表编号。
+\endgroup
+热方程中的温差可用摄氏温度计算；所有指数式中的温度严格取$T_K=T+273.15$。输入半径由cm换算为m，输出时再换回cm。为避免混淆，场量的偏导数均以分式书写，$s$、$a$等物理标记与$i$等离散索引保留为下标。
+
+\section{问题一模型的建立与求解}
+\label{sec:p1}
+\input{sec/问题一模型建立}
+\input{sec/问题一模型求解}
+\input{sec/问题一结果分析}
+
+% 此处允许前节浮动图自然排放，避免节首浮动屏障触发换页。
+\let\savedSectionFloatBarrier\FloatBarrier
+\let\FloatBarrier\relax
+\section{问题二模型的建立与求解}
+\let\FloatBarrier\savedSectionFloatBarrier
+\label{sec:p2}
+\input{sec/问题二模型建立}
+\input{sec/问题二模型求解}
+\input{sec/问题二结果分析}
+
+\section{问题三模型的建立与求解}
+\label{sec:p3}
+\input{sec/问题三模型建立}
+\input{sec/问题三模型求解}
+\input{sec/问题三结果分析}
+
+\section{问题四模型的建立与求解}
+\label{sec:p4}
+\input{sec/问题四模型建立}
+\input{sec/问题四模型求解}
+\input{sec/问题四结果分析}
+
+\section{模型检验与灵敏度分析}
+\label{sec:verification}
+\input{sec/模型检验与灵敏度分析}
+
+% 第十节接续前文，避免浮动屏障触发节首换页。
+\let\savedSectionFloatBarrier\FloatBarrier
+\let\FloatBarrier\relax
+\section{模型评价与改进方向}
+\let\FloatBarrier\savedSectionFloatBarrier
+\label{sec:evaluation}
+\input{sec/模型评价与改进方向}

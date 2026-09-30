@@ -1,0 +1,91 @@
+% 6.1：以附录3及既定显热、固定域假设建立双向变物性耦合模型。
+\subsection{模型建立}
+\label{sec:p2-model}
+
+问题二沿用问题一的固定圆柱径向模型、守恒关系及显热近似，
+以状态相关物性连接温度与含水率，形成双向耦合。
+此类通过状态相关物性描述热湿相互作用的思路，已用于生物多孔介质热风干燥建模\cite{porous-drying}。
+
+\subsubsection{状态相关物性与双向反馈关系}
+
+仍以$T(r,t)$和$C(r,t)$为两个待求场量，令$T_K=T+273.15$为绝对温度。
+本问物性由局部状态确定：
+\begin{equation}
+\begin{aligned}
+  \rho(C)&=650+128C
+    &&\mathrm{kg/m^3},\\
+  c_p(C)&=1450+2736\frac{C}{C+1}
+    &&\mathrm{J/(kg\,K)},\\
+  k(C)&=0.21+0.38\frac{C}{C+1}
+    &&\mathrm{W/(m\,K)},\\
+  D(C,T_K)&=2.4\times10^{-3}
+    \exp\!\left(-\frac{0.45}{C}\right)
+    \exp\!\left(-\frac{3850}{T_K}\right)
+    &&\mathrm{m^2/s}.
+\end{aligned}
+\label{eq:p2-properties}
+\end{equation}
+由式\eqref{eq:p2-properties}知，$C>0$时
+$\partial D/\partial T_K>0$、$\partial D/\partial C>0$。
+在本题向外排湿条件下，温度升高使水分扩散系数$D$增大，促进水分向表面迁移并增强失水；
+失水又使含水率$C$降低，从而减小$D$，抑制后续水分迁移，形成负反馈。
+这一促进与抑制关系及含水率对热物性的反馈见图\ref{fig:p2-coupling}。
+
+\begin{figure}[!htbp]
+  \centering
+  \begin{tikzpicture}[
+    box/.style={draw,rounded corners=2pt,fill=black!3,align=center,
+      minimum height=1.05cm,text width=2.7cm,inner sep=5pt,font=\small},
+    flow/.style={-{Stealth[length=2mm]},semithick},
+    every node/.append style={font=\small}
+  ]
+    \node[box] (temp) at (0,0) {温度升高\\$T\uparrow$};
+    \node[box] (diff) at (4.7,0) {水分扩散系数\\$D(C,T_K)$};
+    \node[box] (water) at (9.4,0) {含水率\\$C(r,t)$};
+    \node[box,text width=4.0cm] (thermal) at (4.7,-2.1)
+      {热容量$\rho(C)c_p(C)$\\导热系数$k(C)$};
+    \draw[flow] (temp.east) -- node[above]{$+$} node[below]{增大$D$} (diff.west);
+    \draw[flow] (diff.east) -- node[above]{$-$} node[below]{促进失水} (water.west);
+    \draw[flow] (water.north) to[out=90,in=90,looseness=1.1]
+      node[above]{$+$：$C\downarrow$使$D\downarrow$} (diff.north);
+    \draw[flow] (water.south) -- (9.4,-2.1)
+      -- node[below]{$+$：同向变化} (thermal.east);
+    \draw[flow] (thermal.west) -- node[below]{$\pm$：综合热响应} (0,-2.1)
+      -- (temp.south);
+    \node[align=center,font=\footnotesize] at (4.7,-3.25)
+      {$+$表示同向影响，$-$表示反向影响；$D\to C\to D$构成负反馈。\\
+       $D\to C$表示整体失水趋势，各位置的局部响应由耦合方程确定。\\
+       $\pm$表示热容量与导热能力共同作用，温度变化方向由热方程确定。};
+  \end{tikzpicture}
+  \caption{问题二温度、含水率与物性之间的反馈关系}
+  \label{fig:p2-coupling}
+\end{figure}
+
+\subsubsection{非线性热质耦合方程的建立}
+
+沿用问题一的推导，将式\eqref{eq:p1-heat}、式\eqref{eq:p1-mass}中的物性
+替换为式\eqref{eq:p2-properties}，将变系数$k(C)$和$D(C,T_K)$保留在散度内部，得到
+\begin{equation}
+\left\{
+\begin{aligned}
+  \rho(C)c_p(C)\frac{\partial T}{\partial t}
+    &=\frac{1}{r}\frac{\partial}{\partial r}
+      \left[rk(C)\frac{\partial T}{\partial r}\right],\\
+  \frac{\partial C}{\partial t}
+    &=\frac{1}{r}\frac{\partial}{\partial r}
+      \left[rD(C,T_K)\frac{\partial C}{\partial r}\right],
+\end{aligned}
+\right.
+\qquad 0<r<R_0,\quad t>0.
+\label{eq:p2-coupled-pde}
+\end{equation}
+其中$\rho(C)$仍用于有效热容量计算；水分方程沿用问题一的干基变量及干骨架假设。
+
+\subsubsection{初边条件的沿用与物性更新}
+
+初值、中心对称条件及环境插值与延拓分别沿用式\eqref{eq:p1-initial}、
+式\eqref{eq:p1-center}和式\eqref{eq:p1-environment}。
+表面边界沿用式\eqref{eq:p1-boundary-heat}、式\eqref{eq:p1-boundary-mass}，
+其中$k$、$D$分别更新为当前表面状态对应的$k(C_s)$、$D(C_s,T_s+273.15)$，
+$h$、$h_m$及表面值定义不变。
+全过程从原始初态$t=0$起统一采用附录3物性。

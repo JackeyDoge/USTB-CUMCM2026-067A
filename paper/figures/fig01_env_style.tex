@@ -1,0 +1,100 @@
+% Figure 2: original environment records, with fonts matching Figure 8(a).
+% Run code/export_figure2_data.py, then compile this file with XeLaTeX.
+% Copy the resulting PDF to 图3.pdf, which the paper already includes.
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{pgfplots}
+\setmainfont{Times New Roman}
+\setCJKmainfont{SimSun}
+\xeCJKDeclareCharClass{CJK}{"2103}
+\pgfplotsset{compat=1.18}
+\definecolor{TemperatureRed}{HTML}{D55E00}
+\definecolor{ConcentrationBlue}{HTML}{0072B2}
+\definecolor{ReferenceGray}{HTML}{666666}
+\input{fig01_env_limits.tex}
+\pgfplotsset{
+  environment panel/.style={
+    scale only axis,
+    width=357.12bp,height=115.92bp,
+    xmin=0,xmax=4.8,
+    xtick={0,1,2,3,4},xticklabels={0,1,2,3,4},
+    axis lines=box,
+    axis line style={black,line width=0.8bp},
+    tick align=outside,
+    xtick pos=bottom,ytick pos=left,
+    tick style={black,line width=0.8bp},
+    major tick length=3.5bp,
+    tick label style={font=\fontsize{10.5}{12}\selectfont},
+    label style={font=\fontsize{10.5}{12}\selectfont},
+    grid=major,grid style={draw=black!15,line width=0.5bp},
+    axis background/.style={fill=white},
+    scaled ticks=false,
+    clip=true,
+  },
+}
+\begin{document}
+\begin{tikzpicture}[x=1bp,y=1bp]
+  % Preserve the former PDF's canvas and both axis rectangles.
+  \path[use as bounding box] (0,0) rectangle (413.9575,299.549);
+  \begin{pgfinterruptboundingbox}
+    \begin{axis}[
+      environment panel,
+      at={(49.6375bp,176.429bp)},anchor=south west,
+      ymin=\TemperatureMinimum,ymax=\TemperatureMaximum,
+      ytick={30,35,40,45,50},yticklabels={30,35,40,45,50},
+      xticklabels={},
+      ylabel={烘房温度(℃)},
+      ylabel style={at={(axis description cs:-0.077,0.5)},anchor=south},
+      legend style={
+        at={(0.997,0.060)},anchor=south east,
+        fill=white,fill opacity=1,text opacity=1,draw=none,
+        font=\fontsize{7}{8.2}\selectfont,
+        inner sep=0.8bp,row sep=0.5bp,column sep=1bp,
+      },
+      legend image code/.code={
+        \draw[#1] plot coordinates {(0bp,0bp) (6bp,0bp)};
+      },
+      legend cell align=left,
+    ]
+      \addplot[TemperatureRed,line width=1.4bp]
+        table[x=time,y=temperature] {fig01_env_records.dat};
+      \addlegendentry{附件1实测}
+      \addplot[TemperatureRed,line width=1.4bp,
+        dash pattern=on 5.18bp off 2.24bp,
+        legend image post style={dash pattern=on 2bp off 1.5bp}]
+        coordinates {(4,50) (4.8,50)};
+      \addlegendentry{恒温段设计值}
+      \addplot[ReferenceGray,line width=0.9bp,
+        dash pattern=on 0.9bp off 1.485bp,forget plot]
+        coordinates {(4,\TemperatureMinimum) (4,\TemperatureMaximum)};
+      \node[anchor=base,inner sep=0pt,text=ReferenceGray,
+        font=\fontsize{9.5}{11}\selectfont]
+        at (axis cs:1.9,30.5) {预热平衡阶段};
+      \node[anchor=base,inner sep=0pt,text=ReferenceGray,
+        font=\fontsize{9.5}{11}\selectfont]
+        at (axis cs:4.4,44.5) {恒温干燥阶段};
+    \end{axis}
+    \begin{axis}[
+      environment panel,
+      at={(49.6375bp,37.325bp)},anchor=south west,
+      ymin=\ConcentrationMinimum,ymax=\ConcentrationMaximum,
+      ytick={0.02,0.03,0.04,0.05},
+      yticklabels={0.02,0.03,0.04,0.05},
+      ylabel={烘房水分浓度(kg/kg)},
+      ylabel style={at={(axis description cs:-0.077,0.5)},anchor=south},
+      xlabel={时间(h)},
+      xlabel style={at={(axis description cs:0.5,-0.16)},anchor=north},
+    ]
+      \addplot[ConcentrationBlue,line width=1.4bp]
+        table[x=time,y=concentration] {fig01_env_records.dat};
+      \addplot[ConcentrationBlue,line width=1.4bp,
+        dash pattern=on 5.18bp off 2.24bp]
+        coordinates {(4,0.05) (4.8,0.05)};
+      \addplot[ReferenceGray,line width=0.9bp,
+        dash pattern=on 0.9bp off 1.485bp]
+        coordinates {(4,\ConcentrationMinimum) (4,\ConcentrationMaximum)};
+    \end{axis}
+  \end{pgfinterruptboundingbox}
+\end{tikzpicture}
+\end{document}

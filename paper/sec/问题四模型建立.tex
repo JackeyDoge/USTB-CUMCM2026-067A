@@ -1,0 +1,153 @@
+% 8.1：依据给定半径建立随骨架运动的热质模型，并映射至固定区间。
+\subsection{模型建立}
+\label{sec:p4-model}
+
+本问引入失水收缩，从原始初态$t=0$起统一采用附录4物性，
+描述骨架运动及水分相对骨架的扩散，并将运动区域映射至固定区间。
+
+\subsubsection{半径函数与物性更新}
+
+附件2给出了$0$至$72\ \mathrm{h}$内每隔$1800\ \mathrm{s}$的半径记录，
+半径从$2.000\ \mathrm{cm}$逐渐减至$1.198\ \mathrm{cm}$。
+沿用径向近似及长度不变假设，当前区域为$0\le r\le R(t)$。
+将半径换算为米，以半径记录替换环境记录，沿用式\eqref{eq:p1-environment}的分段线性规则；
+超出记录区间时按末值$R=0.01198\ \mathrm{m}$恒定延拓。
+
+附录4的物性关系为
+\begin{equation}
+\begin{aligned}
+  \rho(C)&=760+90C
+    &&\mathrm{kg/m^3},\\
+  c_p(C)&=1850+2150\frac{C}{C+1}
+    &&\mathrm{J/(kg\,K)},\\
+  k(C)&=0.12+0.20\frac{C}{C+1}
+    &&\mathrm{W/(m\,K)},\\
+  D(C,T_K)&=4.2\times10^{-4}
+    \exp\!\left(-\frac{0.30}{C}\right)
+    \exp\!\left(-\frac{3850}{T_K}\right)
+    &&\mathrm{m^2/s},
+\end{aligned}
+\label{eq:p4-properties}
+\end{equation}
+其中$T_K=T+273.15$；热湿反馈结构沿用第\ref{sec:p2-model}节，
+$R(t)$作为给定的几何输入。
+
+\subsubsection{随骨架运动的热质守恒方程}
+
+按假设\ref{assumption:shrinkage}，同一骨架物质点的$r/R(t)$保持不变。
+在各半径插值区间内，骨架径向速度为
+\begin{equation}
+  v(r,t)=\frac{r}{R(t)}\frac{\dd R(t)}{\dd t}.
+  \label{eq:p4-velocity}
+\end{equation}
+令$\rho_d$为单位当前体积内的干物质质量，水分质量密度为$\rho_d C$；
+$\rho_d$与式\eqref{eq:p4-properties}中用于有效热容量的$\rho(C)$含义不同。
+忽略干物质损失，以
+$j=-\rho_d D(C,T_K)\frac{\partial C}{\partial r}$
+表示相对骨架的径向水分通量，则骨架与水分连续性方程为
+\begin{equation}
+\begin{aligned}
+  \frac{\partial\rho_d}{\partial t}
+    +\frac{1}{r}\frac{\partial}{\partial r}(r\rho_d v)&=0,\\
+  \frac{\partial(\rho_d C)}{\partial t}
+    +\frac{1}{r}\frac{\partial}{\partial r}(r\rho_d C v)
+    &=-\frac{1}{r}\frac{\partial(rj)}{\partial r}.
+\end{aligned}
+\label{eq:p4-continuity}
+\end{equation}
+第二式减去第一式的$C$倍，消去骨架压缩引起的共同密度变化。
+采用同一时刻$\rho_d$径向均匀的有效传输闭合，约去$\rho_d$，
+结合显热传导近似得到运动区域上的控制方程：
+\begin{equation}
+\left\{
+\begin{aligned}
+  \rho(C)c_p(C)\left(\frac{\partial T}{\partial t}
+    +v\frac{\partial T}{\partial r}\right)
+    &=\frac{1}{r}\frac{\partial}{\partial r}
+      \left[rk(C)\frac{\partial T}{\partial r}\right],\\
+  \frac{\partial C}{\partial t}+v\frac{\partial C}{\partial r}
+    &=\frac{1}{r}\frac{\partial}{\partial r}
+      \left[rD(C,T_K)\frac{\partial C}{\partial r}\right],
+\end{aligned}
+\right.
+\quad 0<r<R(t).
+\label{eq:p4-moving-pde}
+\end{equation}
+左端为随骨架的变化率。
+干基含水率是水与干物质的质量比，单纯收缩不会使其自动增大，
+故不另加体积浓度形式的压缩源项。
+
+\subsubsection{物质坐标下的固定区域模型}
+
+引入物质坐标及对应场量
+\[
+  \xi=\frac{r}{R(t)},\qquad
+  \widetilde T(\xi,t)=T(R(t)\xi,t),\qquad
+  \widetilde C(\xi,t)=C(R(t)\xi,t).
+\]
+其中$\xi=0,1$分别对应中心和实际表面，固定$\xi$即跟随同一骨架物质点。
+如图\ref{fig:p4-schematic}所示，收缩过程中同一物质点的物理位置随$R(t)$改变，
+而其归一化坐标保持不变，从而将变化的物理区域映射为固定计算区间$[0,1]$。
+
+\pfig{图9.png}{0.90}{问题四收缩物理区域与固定物质坐标区域的映射示意图}{fig:p4-schematic}
+
+对$u=T$或$C$应用链式法则，得
+\begin{equation}
+  \frac{\partial\widetilde u}{\partial t}
+    =\frac{\partial u}{\partial t}
+      +v\frac{\partial u}{\partial r},\qquad
+  \frac{\partial u}{\partial r}
+    =\frac{1}{R(t)}\frac{\partial\widetilde u}{\partial\xi}.
+  \label{eq:p4-coordinate-transform}
+\end{equation}
+代入式\eqref{eq:p4-moving-pde}并乘以$R^2(t)$，得固定区间上的方程：
+\begin{equation}
+\left\{
+\begin{aligned}
+  R^2(t)\rho(\widetilde C)c_p(\widetilde C)
+    \frac{\partial\widetilde T}{\partial t}
+    &=\frac{1}{\xi}\frac{\partial}{\partial\xi}
+      \left[\xi k(\widetilde C)
+      \frac{\partial\widetilde T}{\partial\xi}\right],\\
+  R^2(t)\frac{\partial\widetilde C}{\partial t}
+    &=\frac{1}{\xi}\frac{\partial}{\partial\xi}
+      \left[\xi D(\widetilde C,\widetilde T_K)
+      \frac{\partial\widetilde C}{\partial\xi}\right],
+\end{aligned}
+\right.
+\quad 0<\xi<1,
+\label{eq:p4-fixed-pde}
+\end{equation}
+其中$\widetilde T_K=\widetilde T+273.15$。
+骨架运动已包含在固定$\xi$处的时间导数内，尺寸变化通过$R^2(t)$进入储存项。
+
+\subsubsection{初边条件与全域达标判据}
+
+初始温湿状态沿用式\eqref{eq:p1-initial}，且$R(0)=R_0$；
+环境函数沿用式\eqref{eq:p1-environment}的插值及前文的恒定延拓，$h$、$h_m$不变。
+
+记$T_s=\widetilde T(1,t)$、$C_s=\widetilde C(1,t)$及$T_{K,s}=T_s+273.15$。
+由中心对称及相对骨架的表面传递条件，经式\eqref{eq:p4-coordinate-transform}变换得
+\begin{equation}
+\left\{
+\begin{aligned}
+  \left.\frac{\partial\widetilde T}{\partial\xi}\right|_{\xi=0}
+    &=\left.\frac{\partial\widetilde C}{\partial\xi}\right|_{\xi=0}=0,\\
+  -k(C_s)\left.\frac{\partial\widetilde T}{\partial\xi}\right|_{\xi=1}
+    &=R(t)h[T_s-T_a(t)],\\
+  -D(C_s,T_{K,s})\left.\frac{\partial\widetilde C}{\partial\xi}\right|_{\xi=1}
+    &=R(t)h_m[C_s-C_a(t)].
+\end{aligned}
+\right.
+\label{eq:p4-boundary}
+\end{equation}
+表面交换项含$R(t)$，与储存项中的$R^2(t)$不同；
+固定域方程及边界条件均无需对半径记录额外求导。
+
+全域最大含水率为
+\begin{equation}
+  C_{\max}(t)=\max_{0\le r\le R(t)}C(r,t)
+    =\max_{0\le\xi\le1}\widetilde C(\xi,t),
+  \label{eq:p4-maximum}
+\end{equation}
+临界烘干时间$t_*$沿用式\eqref{eq:p3-endpoint}的判据。

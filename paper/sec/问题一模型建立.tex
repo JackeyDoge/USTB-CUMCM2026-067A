@@ -1,0 +1,118 @@
+% 本文件包含第五节的5.1；模型求解与结果分析分别见同目录下的对应文件。
+\subsection{模型建立}
+\label{sec:p1-model}
+
+问题一要求描述预热阶段药材内部的温度和含水率分布。依据前述假设，首先利用几何尺度确定空间描述的维度，再比较内部传递与表面交换的相对强弱，判断是否需要保留内部梯度；在此基础上，由能量守恒和水质量连续性建立控制方程，并结合环境记录确定初边值条件。
+
+\subsubsection{径向分布模型的选择}
+
+药材长度$L=0.25\ \mathrm{m}$、半径$R_0=0.02\ \mathrm{m}$，长径比
+$L/(2R_0)=6.25$，两端面积占总表面积的比例为$R_0/(L+R_0)=7.41\%$。
+依据假设\ref{assumption:radial}，忽略轴向影响，只考虑径向传热传质，以远离端部的中部截面为代表，建立径向模型$T(r,t)$、$C(r,t)$。
+
+毕渥数用于比较内部传递阻力与表面交换阻力\cite{heat}。
+题给$h=25\ \mathrm{W/(m^2 K)}$、$k=0.36\ \mathrm{W/(m K)}$、
+$h_m=8\times10^{-7}\ \mathrm{m/s}$，水分扩散系数为
+\begin{equation}
+  D(C)=7\times10^{-9}\exp\!\left(-\frac{0.89}{C}\right)\ \mathrm{m^2/s},
+  \label{eq:p1-diffusivity}
+\end{equation}
+初始含水率$C_0=2.55\cunit$对应$D(C_0)=4.9377\times10^{-9}\ \mathrm{m^2/s}$。
+以半径为特征长度，热、质毕渥数分别为
+\begin{equation}
+  Bi_T=\frac{hR_0}{k}=1.3889,\qquad
+  Bi_C(C_0)=\frac{h_mR_0}{D(C_0)}=3.2404.
+  \label{eq:p1-biot}
+\end{equation}
+两者均达到单位量级；即使用圆柱体积与侧面积之比$L_c=R_0/2$作为集总判据的特征长度，
+热毕渥数仍为$0.6944>0.1$。失水还会减小$D(C)$、增大传质毕渥数，故须保留内部径向梯度。
+
+\subsubsection{由守恒关系建立热量与水分传递方程}
+
+设$\rho_d$为单位药材体积中的干物质质量，水质量密度为$w=\rho_d C$。
+固定、静止且均匀的干骨架近似下，$\rho_d$为常数；它与热容量中的有效密度$\rho$含义不同。
+取径向向外为水质量通量$j_w$的正方向，由圆柱壳层的水质量收支及菲克定律\cite{fick}得
+\begin{equation}
+\begin{aligned}
+  \frac{\partial w}{\partial t}
+    +\frac{1}{r}\frac{\partial}{\partial r}(rj_w)&=0,\\
+  j_w=-D(C)\frac{\partial w}{\partial r}
+    &=-\rho_dD(C)\frac{\partial C}{\partial r}.
+\end{aligned}
+  \label{eq:p1-water-continuity}
+\end{equation}
+式\eqref{eq:p1-water-continuity}中第一式为水质量连续性方程。
+将$w=\rho_d C$及通量关系代入该式，约去$\rho_d$，得到
+\begin{equation}
+  \boxed{\frac{\partial C}{\partial t}
+  =\frac{1}{r}\frac{\partial}{\partial r}
+    \left[rD(C)\frac{\partial C}{\partial r}\right].}
+  \label{eq:p1-mass}
+\end{equation}
+由于$D(C)$随局部含水率变化，须将其保留在空间导数内部。
+
+按照假设\ref{assumption:sensible-heat}，仅计显热储存和导热。
+以$q_T$表示径向向外的热流密度，能量守恒与傅里叶定律为\cite{heat}
+\begin{equation}
+  \rho c_p\frac{\partial T}{\partial t}
+  +\frac{1}{r}\frac{\partial}{\partial r}(rq_T)=0,\qquad
+  q_T=-k\frac{\partial T}{\partial r}.
+  \label{eq:p1-energy-fourier}
+\end{equation}
+代入常热物性$\rho=820\ \mathrm{kg/m^3}$、$c_p=2600\ \mathrm{J/(kg\,K)}$、
+$k=0.36\ \mathrm{W/(m\,K)}$及热流关系，得
+\begin{equation}
+  \boxed{\rho c_p\frac{\partial T}{\partial t}
+  =\frac{k}{r}\frac{\partial}{\partial r}
+    \left(r\frac{\partial T}{\partial r}\right).}
+  \label{eq:p1-heat}
+\end{equation}
+两场的求解区域均为$0<r<R_0$、$0<t\le1800\ \mathrm{s}$。
+
+\subsubsection{初始条件与时变边界条件的确立}
+
+药材初始温湿状态均匀，取
+\begin{equation}
+  T(r,0)=28\tempunit,\qquad
+  C(r,0)=2.55\cunit,\qquad 0\le r\le R_0.
+  \label{eq:p1-initial}
+\end{equation}
+中心满足轴对称条件：
+\begin{equation}
+  \left.\frac{\partial T}{\partial r}\right|_{r=0}=0,\qquad
+  \left.\frac{\partial C}{\partial r}\right|_{r=0}=0.
+  \label{eq:p1-center}
+\end{equation}
+
+记表面值$T_s=T(R_0,t)$、$C_s=C(R_0,t)$。
+按假设\ref{assumption:equilibrium}，将环境水分浓度视为有效平衡含水率$C_a(t)$，
+表面水质量交换通量为$\rho_dh_m[C_s-C_a(t)]$。
+令内部通量与表面对流交换相等，并在传质关系中约去$\rho_d$，得到第三类边界条件
+\begin{align}
+  -k\left.\frac{\partial T}{\partial r}\right|_{r=R_0}
+    &=h[T_s-T_a(t)],\label{eq:p1-boundary-heat}\\
+  -D(C_s)\left.\frac{\partial C}{\partial r}\right|_{r=R_0}
+    &=h_m[C_s-C_a(t)].\label{eq:p1-boundary-mass}
+\end{align}
+表面值由环境交换与内部传递共同确定，仍是模型的未知量。
+图\ref{fig:p1-schematic}概括了药材内部的径向传递过程及表面与烘房之间的热质交换关系。
+
+\pfig{图2.png}{0.82}{问题一圆柱药材径向传热传质模型示意图}{fig:p1-schematic}
+
+为给上述边界条件提供任意时刻的环境值，需要进一步处理附件1的离散记录。
+附件1每隔$60\ \mathrm{s}$记录环境状态。为获取中间时刻信息并减小误差，
+记记录时刻及对应环境值为$t_j$、$y_{a,j}$，对$y_a\in\{T_a,C_a\}$作分段线性插值\cite{num}：
+\begin{equation}
+  y_a(t)=y_{a,j}
+  +\frac{t-t_j}{t_{j+1}-t_j}(y_{a,j+1}-y_{a,j}),
+  \qquad t_j\le t\le t_{j+1}.
+  \label{eq:p1-environment}
+\end{equation}
+如图\ref{fig:p1-environment}所示，前$4\ \mathrm{h}$采用记录插值，
+此后恒定延拓为$T_a=50\tempunit$、$C_a=0.05\cunit$。
+本问的$0$--$1800\ \mathrm{s}$均位于记录区间内，直接以插值结果驱动表面边界。
+
+\pfig{图3.pdf}{0.88}{烘房环境记录的分段线性插值及恒定延拓}{fig:p1-environment}
+
+式\eqref{eq:p1-mass}、式\eqref{eq:p1-heat}及上述初边值条件构成完整模型。
+本问热方程及其边界不含$C$，水分方程及其边界不含$T$，两场相互独立，可分别求解。

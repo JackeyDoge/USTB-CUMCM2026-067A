@@ -1,0 +1,241 @@
+Generation record
+Date: 2026-09-11
+Mode: built-in image_gen tool
+User-mentioned model: GPT-Image-2.5 (optional suggestion)
+Actual model identifier: not exposed by the tool; not independently confirmed
+Asset: paper/figures/fig00_framework.png
+Postprocessing: none; original generated PNG copied into the project
+
+Final prompt
+
+Use case: infographic-diagram.
+Asset type: a publication-ready overall solution flowchart for a Chinese undergraduate mathematical modeling competition paper about hot-air drying of cylindrical medicinal material.
+Create ONE crisp, high-resolution raster flowchart, wide landscape canvas with aspect ratio about 2:1. Plain pure white background, tight clean margins. All text must be EXACT simplified Chinese text specified below, accurately typeset, large enough to remain legible when printed at 16 cm width. Black or very dark charcoal text, clean Chinese academic sans-serif typography. Use thin dark slate outlines, very pale blue-gray node fills, straight orthogonal arrows. Flat technical diagram; no illustrations, icons, shadows, decorative textures, gradients, 3D, logos, watermark, figure number, or external title. No formulas or numeric results beyond the exact time labels below.
+
+Composition: a centered top input box, a full-width shared-method box below it, a middle row of FOUR equal-width evenly spaced task cards in order from left to right, and a full-width validation box at the bottom. All connected by clean directional arrows. The top input box has ONE downward arrow into the shared-method box. From the bottom of the shared-method box a horizontal connector branches into four downward arrows, one to each card. Below the four cards, four downward arrows merge into a horizontal connector that leads down into the bottom validation box. No crossing lines. Between adjacent middle cards draw a small dashed right-facing arrow indicating progressive extension of the modeling method, not transfer of initial data. Keep arrows outside cards, never across text. Allow sufficient blank space for each text line. Give each card a pale blue-gray title strip and white body with visible border. Bottom box visually matches shared-method box. The visual hierarchy should emphasize the FOUR question cards and accurately communicate a common framework with progressively expanded models.
+
+Exact text, line breaks as indicated:
+TOP BOX (2 centered lines):
+题目与附件数据
+环境插值 · 物性关系 · 半径历程
+
+SHARED-METHOD BOX (2 centered lines):
+径向热质传递模型
+中心对称 · 表面对流 · 有限体积 · 隐式迭代
+
+CARD 1 (title strip first line, then 4 separate body lines):
+问题一
+预热阶段
+常热物性
+温湿场分别求解
+前30 min分布
+
+CARD 2:
+问题二
+变物性耦合
+中点物性迭代
+温湿场联立求解
+前3 h分布
+
+CARD 3:
+问题三
+全域达标
+延续问题二模型
+最大含水率判定
+临界烘干时间
+
+CARD 4:
+问题四
+收缩区域
+物质坐标变换
+半径与物性更新
+临界时间与分布
+
+BOTTOM BOX (2 centered lines):
+模型检验与结果分析
+半解析解 · 制造解 · 网格与步长检验 · 离散收支 · 参数灵敏度
+
+Check every Chinese character and punctuation for fidelity. Four cards only. Preserve the exact text with no additions or omissions. Ensure all lettering and thin arrows remain crisp and high contrast in grayscale printing.
+
+Revision 2 — wording revised at the user's request
+Date: 2026-09-11
+Mode: built-in image_gen tool, editing the previous local framework image
+Actual model identifier: not exposed by the tool; not independently confirmed
+Reference image: previous paper/figures/fig00_framework.png
+Generated output: C:/Users/17547/.codex/generated_images/01a08efa-19d3-75e2-861b-854dbc688bdb/exec-9c411ae8-7272-4eab-9409-b43be0a96c3a.png
+Project asset: paper/figures/fig00_framework.png
+Postprocessing: none; original generated PNG copied into the project
+Purpose: replace compressed keyword lists with direct descriptions of the four questions and their solution steps; keep the current paper's model, diagram topology and page placement.
+
+Revision 2 final prompt
+
+Use case: text-localization.
+The supplied image is the EDIT TARGET: the overall solution framework figure in a Chinese mathematical modeling paper. Regenerate this figure with rewritten Chinese wording, preserving its existing four-column organization, relative box positions, line connections, and approximately 2:1 landscape aspect ratio. The main change is the text, not the layout.
+
+Visual requirements: publication-quality flat academic flowchart, pure white background, black/dark-charcoal Chinese lettering, thin dark slate borders, very pale blue-gray header strips and long boxes, no gradients, no drop shadows, no decorative images, no icons. Render all text sharply with restrained academic typography, modest weight for body text and somewhat heavier titles. Give body lettering enough size to read when the whole figure is printed at about 12 cm width. Keep tight but clean margins. No additional caption or figure number inside the artwork.
+
+Keep the topology: centered input box at top; one downward arrow to a full-width model box; orthogonal branching line with four downward arrows to four equal question cards; small right-pointing DASHED arrows between adjacent cards; downward connections from the four cards joining before the bottom wide verification box. No lines through text and no crossing connectors. The dashed arrows indicate gradual extension of the method. Four cards only. No formulas, new modeling assumptions or result values.
+
+REPLACE ALL existing text with EXACTLY the following wording. Preserve the given line breaks within each box. Use the exact Chinese characters, no additions, omissions or paraphrases.
+
+TOP INPUT BOX, 2 centered lines:
+烘干条件与药材参数
+整理温湿记录、物性关系和半径变化
+
+WIDE MODEL BOX, 2 centered lines:
+建立径向传热传质模型
+结合中心对称与表面交换条件，用有限体积法求解
+
+CARD 1, first line is the header strip, remaining 4 centered body lines:
+问题一
+分析预热过程
+采用常热物性
+分别求解温湿场
+给出前30分钟分布
+
+CARD 2:
+问题二
+分析全程温湿变化
+计入物性变化
+联立求解温湿场
+给出前3小时分布
+
+CARD 3:
+问题三
+确定烘干时间
+沿用问题二模型
+检查最大含水率
+求得整体达标时刻
+
+CARD 4:
+问题四
+考虑药材收缩
+由记录确定半径
+转至物质坐标求解
+计算所需烘干时间
+
+BOTTOM WIDE BOX, 2 centered lines:
+检验结果并分析误差
+与半解析解对照，检查网格与步长影响，考察参数变化
+
+Review the Chinese text character by character. Preserve legibility and enough vertical spacing. Ensure all line endings and arrows remain well inside the canvas.
+
+
+Revision 3 — black, white and gray palette (2026-09-11)
+User instruction: 保持框图内容不变，色彩只用灰黑白三种颜色。
+Mode: built-in image_gen image editing; exact model identifier not exposed by the interface.
+Initial reference: paper/figures/fig00_framework.png (Revision 2).
+Two image-edit calls were used; the second output was selected.
+First output: C:\Users\17547\.codex\generated_images\01a08efa-19d3-75e2-861b-854dbc688bdb\exec-43752fae-09fa-4a40-9016-f2296b4ba4bf.png
+Selected output: C:\Users\17547\.codex\generated_images\01a08efa-19d3-75e2-861b-854dbc688bdb\exec-2cd6bdbf-9f26-4205-96f2-dad3cef29be0.png
+Saved unchanged as: paper/figures/fig00_framework.png
+Image dimensions: 1774 x 887 pixels. No postprocessing was applied.
+Review: Chinese wording, line breaks, four problem cards and arrow connections were visually checked against Revision 2. The visible palette is black, white and gray. The native PNG uses RGB encoding with minor channel differences in some pixels (maximum channel spread 12/255); an exact R=G=B pixel invariant was requested but was not fully achieved by the generator.
+Backup: scratch/framework-grayscale-before/fig00_framework.png and framework-prompt.txt.
+
+First edit prompt:
+Edit the supplied existing Chinese academic flowchart. This is strictly a COLOR-ONLY edit. Preserve its entire content, Chinese typography and every line break, relative and absolute layout, number and sizes of boxes, all arrow routes and dashed arrows, margins, line weights, and 2:1 aspect ratio. Preserve the original 1774 x 887 pixel dimensions if supported. Do not reword, add, omit, or rearrange anything. Do not add a title or caption. Do not change the font. Change only the palette to BLACK, WHITE, and NEUTRAL GRAY: pure white #FFFFFF page and unfilled areas; black #000000 text, outlines and arrow strokes; flat light neutral gray #E6E6E6 in the regions currently filled blue-gray. Retain white card bodies where they are white. No blue, navy, slate, colored tint, gradient, shadow, or other hue is allowed anywhere. Every output pixel must be neutral: R=G=B (neutral gray antialiasing is allowed). All text must remain perfectly legible and exactly identical to the reference.
+
+The exact existing text, supplied as a preservation check (do NOT change linebreaks or arrangement):
+Top box:
+烘干条件与药材参数
+整理温湿记录、物性关系和半径变化
+Wide shared-model box:
+建立径向传热传质模型
+结合中心对称与表面交换条件，用有限体积法求解
+Left card:
+问题一
+分析预热过程
+采用常热物性
+分别求解温湿场
+给出前30分钟分布
+Second card:
+问题二
+分析全程温湿变化
+计入物性变化
+联立求解温湿场
+给出前3小时分布
+Third card:
+问题三
+确定烘干时间
+沿用问题二模型
+检查最大含水率
+求得整体达标时刻
+Right card:
+问题四
+考虑药材收缩
+由记录确定半径
+转至物质坐标求解
+计算所需烘干时间
+Bottom box:
+检验结果并分析误差
+与半解析解对照，检查网格与步长影响，考察参数变化
+
+Keep input -> shared model -> four parallel problem cards -> bottom verification topology exactly as the reference, including small dashed arrows pointing right between adjacent cards. Only remove color and use the specified black/white/gray palette.
+
+Second edit prompt (referenced first output):
+Apply an exact monochrome/grayscale color edit to this supplied image. Keep absolutely all Chinese text, shapes, arrows, dashed arrows, font, arrangement and the 1774x887 canvas unchanged. The only change is COLOR. The previous version still has a small blue cast in light areas. Remove every trace of that cast. The finished image must be truly grayscale, with zero chroma: R=G=B for ALL pixels. Pure white paper background; black text, lines and arrows; neutral gray box fills. No off-white or cool/warm tint and no colored pixels. Use a grayscale PNG color mode if possible. This should look like a clean black-and-white photocopy. Preserve all words, every character, linebreak and all diagram connections exactly. Do not redraw or embellish. Do not add shadows, gradients or texture. Perform only neutral grayscale conversion.
+
+
+Revision 4 — white main boxes and Songti lettering (2026-09-11)
+User instruction: 将“烘干条件与药材参数”“建立径向传热传质模型”“检验结果并分析误差”三个框的填充色改为白色，并将框图中所有文字字体改为与论文正文一样的宋体。
+Mode: built-in image_gen image editing; exact model identifier not exposed by the interface.
+Edit target: paper/figures/fig00_framework.png (Revision 3).
+Typography reference: scratch/framework-grayscale-page3.png, rendered from the paper; Chinese running paragraphs use Songti/SimSun.
+Selected output: C:\Users\17547\.codex\generated_images\01a08efa-19d3-75e2-861b-854dbc688bdb\exec-fc0daa9c-28e6-4cb8-812a-1ee34741a24a.png
+Saved unchanged as: paper/figures/fig00_framework.png
+No postprocessing was applied. As a generated bitmap, the image contains raster lettering rather than an embedded font; Songti glyph appearance was checked visually against the body text reference.
+Review: three requested boxes have white interiors, four problem header strips retain gray fill, all text uses Songti-style serif glyphs, wording and arrow connections are preserved.
+Backup: scratch/framework-songti-before/fig00_framework.png and framework-prompt.txt.
+
+Full edit prompt:
+Edit Image 1 (the landscape Chinese flowchart). Image 2 is ONLY a typography reference: match the Chinese Songti/SimSun 宋体 serif typeface of the normal running paragraphs on the paper page. Output ONLY the edited landscape flowchart, never the whole paper page.
+
+Make exactly these two changes:
+1. Change the ENTIRE interior fill of these THREE boxes to pure WHITE #FFFFFF: the top input box headed “烘干条件与药材参数”, the wide shared-model box headed “建立径向传热传质模型”, and the bottom results-check box headed “检验结果并分析误差”. Their complete two-line interiors should be white, with black text and unchanged black borders. Keep the four small headers “问题一”“问题二”“问题三”“问题四” filled neutral light GRAY, and keep the four card bodies and external background WHITE.
+2. Change ALL text, including every heading, body line, punctuation mark and numeral, to the Chinese serif font 宋体 (SimSun / Songti), matching the normal paragraph text in Image 2. Chinese glyphs must have the characteristic Song/Ming thin horizontal strokes, thicker vertical strokes and triangular serifs. Do NOT use sans-serif 黑体, SimHei, YaHei, gothic, round, or calligraphic fonts anywhere. Main labels may retain their existing slightly heavier weight and larger size, but they must also be SONGTI SERIF, not sans-serif. The explanatory lines should be normal-weight Songti. Preserve the original centered alignment and text hierarchy. The font change must be clearly visible across ALL lines, including “问题一” to “问题四”.
+
+Preserve every word, every linebreak, every box position/size, margins, black outline weights, arrow geometry, and the original aspect ratio and canvas size (1774 x 887 pixels). Use only black, neutral gray, and white; no colored tint, shadows, textures, or gradients. Keep all text and strokes crisp. Do not add title, caption, figure number, new content or any decorations.
+
+Exact text to preserve:
+TOP BOX (2 lines, WHITE background):
+烘干条件与药材参数
+整理温湿记录、物性关系和半径变化
+
+WIDE MODEL BOX (2 lines, WHITE background):
+建立径向传热传质模型
+结合中心对称与表面交换条件，用有限体积法求解
+
+CARD 1 (gray header, white body):
+问题一
+分析预热过程
+采用常热物性
+分别求解温湿场
+给出前30分钟分布
+
+CARD 2 (gray header, white body):
+问题二
+分析全程温湿变化
+计入物性变化
+联立求解温湿场
+给出前3小时分布
+
+CARD 3 (gray header, white body):
+问题三
+确定烘干时间
+沿用问题二模型
+检查最大含水率
+求得整体达标时刻
+
+CARD 4 (gray header, white body):
+问题四
+考虑药材收缩
+由记录确定半径
+转至物质坐标求解
+计算所需烘干时间
+
+BOTTOM BOX (2 lines, WHITE background):
+检验结果并分析误差
+与半解析解对照，检查网格与步长影响，考察参数变化
+
+Maintain the topology: top -> wide model -> branch down into four equal cards -> merged lines into bottom box; retain small dashed rightward arrows between the adjacent cards. Verify text accuracy character by character. Final output is the landscape diagram only.

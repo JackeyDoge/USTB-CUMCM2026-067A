@@ -1,0 +1,128 @@
+% !TEX program = xelatex
+\documentclass[UTF8,a4paper,zihao=-4]{ctexart}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{booktabs,tabularx,array,hyperref,xurl}
+\hypersetup{hidelinks,pdfauthor={},pdftitle={AI工具使用详情}}
+\setmonofont{Consolas}
+\setCJKmonofont{SimSun}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.15em}
+\linespread{1.18}
+\ctexset{section={beforeskip=0.8em,afterskip=0.5em},subsection={beforeskip=0.6em,afterskip=0.3em}}
+\renewcommand{\arraystretch}{1.18}
+\setlength{\emergencystretch}{2em}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\begin{document}
+\pagestyle{plain}
+\begin{center}{\zihao{3}\heiti AI工具使用详情}\end{center}
+\noindent 适用论文：\textbf{基于热质耦合与收缩动边界的药材烘干过程预测}。\\
+更新日期：2026年9月13日。图号以当前论文重构稿为准。
+
+本说明依据《全国大学生数学建模竞赛人工智能工具使用规定（2026年试行）》第4条编制，列明工具型号、使用环节、主要提示过程及输出采纳和核验情况。工具型号与主要分工按参赛队本次说明登记，后续修改情况结合本会话及项目文件补充；没有提供的逐字提示词、精确调用时间和具体审核步骤不作推定。
+
+\section*{一、工具名称、型号及具体用途}
+\par\noindent\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.20\textwidth}p{0.23\textwidth}L@{}}
+\toprule 工具名称&版本或型号&具体目的与使用环节\\\midrule
+DeepSeek&DeepSeek-V4.1-Flash&论文文本起草、文献信息核验、指定图件绘制、LaTeX排版；相关公式说明、结果解释与程序的辅助核对。生成当前图2、图9两张模型示意图；型号及归属据参赛队说明登记。支撑材料文件清单中\texttt{code/}目录下Python程序的编写；具体文件及后续修改见第三节。\\
+\bottomrule
+\end{tabularx}
+
+\subsection*{论文文本起草与文献信息核验}
+DeepSeek-V4.1-Flash依据题目、附件、现有程序和数值结果，以及参赛队提供的Markdown、Word文档，辅助起草和重构模型建立、模型求解、结果分析等内容，完成摘要及指定Word内容的LaTeX转录，并调整上下文衔接和表述。其参与包括模型与算法的文字论证、推导说明及结果解释，\textbf{不只限于语言润色}。
+
+文献核验环节使用DeepSeek-V4.1-Flash检索出版社、期刊及DOI页面，核对作者、题名、年份、卷期页码和引用内容的适用范围；按用户要求补入热湿耦合、收缩影响和制造解检验相关的三篇中文文献。其他物料的研究用于支持方法或机理说明，本题数值结果由本项目计算提供。
+
+\subsection*{图片绘制与LaTeX排版}
+按参赛队说明，DeepSeek-V4.1-Flash用于生成图1、2、3、6、9、10(b)、11、12；通过TikZ、PGFPlots或Python等绘图方式生成或调整对应图件；示意图与数值结果图的用途在第二节分别说明。
+
+LaTeX排版由DeepSeek-V4.1-Flash辅助完成，包括模板设置、章节和公式编号、图表引用、图片裁剪与等比例缩放、表格格式、摘要页、分页、参考文献、源码附录及AI使用声明，并调用XeLaTeX编译、渲染页面检查。当前论文入口为\texttt{paper/67A论文.tex}，本详情源文件为\texttt{paper/ai-usage.tex}。
+
+\clearpage
+\section*{二、图片使用范围与对应文件}
+以下按当前论文图号登记；图10(b)的工具归属不扩大为整张图10。
+\par\noindent\begin{tabularx}{\textwidth}{@{}p{0.12\textwidth}p{0.23\textwidth}L@{}}
+\toprule 图号&使用型号&内容、目的及当前文件\\\midrule
+图1&DeepSeek-V4.1-Flash&总体求解框架图：按四问关系组织流程与箭头，用TikZ绘制。\texttt{paper/figures/图1.tex}。\\
+图2&DeepSeek-V4.1-Flash&问题一圆柱药材径向传热传质模型示意图，用于说明几何、径向传递及表面交换。\texttt{paper/figures/图2.png}。\\
+图3&DeepSeek-V4.1-Flash&附件1环境记录的分段线性插值及恒定延拓图；调整坐标、字体和图例。\texttt{paper/figures/图3.pdf}。\\
+图6&DeepSeek-V4.1-Flash&温度、含水率和物性的反馈关系图；用正负号解释促进、抑制及负反馈。源码位于\texttt{paper/sec/问题二模型建立.tex}。\\
+图9&DeepSeek-V4.1-Flash&问题四收缩物理区域与固定物质坐标的映射示意图。\texttt{paper/figures/图9.png}。\\
+图10(b)&DeepSeek-V4.1-Flash&半径、平均含水率随时间变化图；使用附件2和已保存数值场，设置双面板、图例及烘干结束标注。\texttt{paper/figures/图10(b).png}。\\
+图11&DeepSeek-V4.1-Flash&问题三、四中心含水率对比图；使用已有计算结果，设置字体、坐标及临界时刻标注。\texttt{paper/figures/图11.pdf}。\\
+图12&DeepSeek-V4.1-Flash&参数灵敏度分析图，展示参数扰动下烘干时长的相对变化；归属按参赛队说明登记。\texttt{paper/figures/图12.png}。\\
+\bottomrule
+\end{tabularx}
+
+\subsection*{图件的采纳与修改方式}
+图2、图9作为模型示意图使用，不作为测量数据或数值计算结果。图3、图10(b)、图11及图12用于展示环境数据、计算场或参数扰动结果。DeepSeek-V4.1-Flash依据用户要求修改绘图程序、标签、图例和版式；LaTeX中的图片占位和裁剪另行检查。
+
+图4、图5、图7、图8及图10(a)的当前PNG由参赛队提供或替换，本次未提供这些PNG最终绘制所用工具的单独说明，故不新增其工具归属。DeepSeek-V4.1-Flash参与了它们的引用、裁剪和排版；通用计算绘图程序同时列入第三节的代码范围。
+
+旧版记录中另有早期框架图的图像生成过程，提示词保存在\texttt{paper/figures/}\allowbreak\texttt{framework-prompt.txt}；该历史版本不作为当前图1使用，其模型编号不沿用为当前图2、图9的调用证明。
+
+\clearpage
+\section*{三、代码编写范围及后续处理}
+参赛队本次将支撑材料清单中以下10个Python文件的代码编写工具登记为\textbf{DeepSeek-V4.1-Flash}。这些文件均位于\texttt{code/}目录。
+\par\noindent\begin{tabularx}{\textwidth}{@{}p{0.40\textwidth}L@{}}
+\toprule 文件&主要功能\\\midrule
+\texttt{common.py}&环境插值、圆柱网格、有限体积组装、三对角求解及时间推进。\\
+\texttt{p1.py}&问题一计算、网格细化和结果输出。\\
+\texttt{p23.py}&问题二、三热湿耦合求解、收敛分析及达标时刻定位。\\
+\texttt{p4.py}&收缩域求解、对照计算及固定物理位置重采样。\\
+\texttt{verify.py}&半解析温度、制造解及线性求解器交叉核验。\\
+\texttt{sensitivity.py}&两类长期模型的参数扰动计算。\\
+\texttt{figures.py}&计算结果及检验图件绘制。\\
+\texttt{audit.py}&工作簿、正文结果表和计算设置的一致性检查及复算。\\
+\texttt{export\_figure2\_data.py}&从附件1导出当前图3所需环境记录及坐标范围。\\
+\texttt{export\_figure8b\_data.py}&导出当前图10(b)所需的半径和含水率绘图数据。\\
+\bottomrule
+\end{tabularx}
+
+文件名中的旧图号保留为程序名称，其当前用途以本表为准。NumPy、SciPy、Matplotlib、pandas等通用库和XeLaTeX属于计算、绘图或排版软件，不作为本次生成式AI型号登记。
+
+\subsection*{后续AI检查与修改记录}
+本会话记录中，DeepSeek-V4.1-Flash辅助核对了公式与程序实现，增加过迭代超限检查，编写或调整\texttt{audit.py}及环境、半径绘图数据导出脚本，并修改\texttt{figures.py}中的图例、字体、输出文件名和标注等内容。这些属于后续代码辅助、检查或绘图配套操作，与参赛队提供的DeepSeek编写分工分别披露。
+
+具体检查涉及扩散系数表达式、绝对温度换算、中心与表面边界、时间中点物性、收缩域系数及临界时刻处理。既有自动检查记录保存在\texttt{结果/audit\_report.json}及相应检验文件中；本次更新AI使用详情未重新运行四问求解器或参数扰动计算。
+
+\subsection*{输出使用范围}
+程序生成或核对四个结果工作簿、未舍入数值场、检验记录和图件；论文附录通过\texttt{lstinputlisting}读取当前代码。论文表格采用对应计算数据，图片样式修改与文件重命名不作为重新求解模型的记录。
+
+\clearpage
+\section*{四、主要提示方式与使用过程}
+\subsection*{1. 论文与文献}
+提示以分项任务为主：指定参考文件、待修改章节、论证重点及保留内容，再根据输出逐轮修订。例如，本会话中要求“重点是要向评委讲明白本题是如何解决边界条件离散且随时间变化的偏微分方程求解问题的”，并要求说明Biot数、三对角矩阵的物理意义及温湿反馈。处理过程为读取项目材料、对照方程与代码、起草段落、接受后续修订指令并保存LaTeX源码。
+
+文献任务先要求检索适合引用的中文文献及位置，明确暂不插入；在参赛队选择前三项后，再补充书目及正文引用。核验依托出版社、期刊与DOI页面，区分文献支持的普遍机理与本题计算结论。
+
+\subsection*{2. 图片}
+DeepSeek-V4.1-Flash绘图提示通常给出图号、数据来源、字体、坐标标签、图例及标注要求。例如要求图6以正负号突出促进和抑制关系；要求图11改为“时间(h)”“中心水分浓度(kg/kg)”，并避免结束时刻标注越出图框。过程包括读取既有数据、修改绘图源码、生成图件、插入论文并核对显示效果。
+
+图2、图9由DeepSeek-V4.1-Flash生成的情况按参赛队说明登记；生成目的分别为径向模型示意和收缩区域映射示意。相关生成会话及逐字提示词未随本次说明提供，因此不将本段用途概述冒充原始提示词。已记录的后续操作包括将图2移至边界条件之后、线性插值之前，将图9插入8.1.3，并检查图片位置与比例。
+
+\subsection*{3. 代码}
+代码任务的输入范围包括题目、附件数据、物性公式、离散方法及结果模板要求；输出范围为第三节所列程序及其数值结果。Claude阶段的逐字提示词未完整提供，本说明据参赛队说明及项目文件概述用途，不虚构对话原文。DeepSeek-V4.1-Flash后续对代码、输出和图件的辅助处理另按第三节记录。
+
+\subsection*{4. 排版}
+提示逐项指定标题层级、摘要转录、图片位置、表格末行加粗及参考文献分页等要求。处理过程为修改LaTeX文件，调用XeLaTeX编译，读取日志和交叉引用，渲染关键页面检查截断、重叠、比例及分页。图片更新后保留既定占位参数并重新编译。
+
+\clearpage
+\section*{五、输出采纳、修改与核验情况}
+\subsection*{1. 已采纳内容及修改记录}
+当前稿采纳了上述文本、指定图件及代码成果。参赛队通过对话指定章节结构、图表选择和修改要求，由AI执行相应编辑：将第五至八节按模型建立、模型求解和结果分析组织；统一Picard停止条件引用；补全三对角矩阵与相邻控制体交换的解释；用Biot数结合扩散率比较说明热湿响应先后；补充反馈图、节点加密原因和指定中文文献。
+
+对结果解释作出的修改包括：将两问烘干时长差说明为收缩与物性共同变化的结果；区分四位小数输出与未舍入值的严格达标判据；将制造解、网格细化及离散收支检查限定为数值实现和离散精度检验，避免等同于实测预测误差验证。
+
+这些内容属于已记录的采纳与修订过程。参赛队提出修改要求和AI执行修改分别记录；人工独立复算情况以本节第3项的最新说明为准。
+
+\subsection*{2. AI辅助核对情况}
+既有项目记录包括公式与程序对照、工作簿及表格一致性检查、未舍入临界时刻核对和编译渲染检查。文献核验用于检查书目信息和引用适用范围；自动数值检查的覆盖范围以实际运行记录为准。这些AI辅助核对与参赛队人工审核、独立复算分别记录。
+
+\subsection*{3. 参赛队人工审核与独立复算}
+\textbf{参赛队于2026年9月13日确认：“已完成全部代码和结果的人工审核和独立复算，结果可信”。}据此，当前人工核验状态更新为：全部代码及结果已经参赛队人工审核并独立复算。
+
+\section*{六、对应声明与支撑材料}
+当前论文已在参考文献之前使用模板命令\texttt{\string\CumcmAIUsed}设置AI工具使用声明。本文件以规定名称“AI工具使用详情.pdf”保存，作为支撑材料中的详细说明；其内容与本次登记的工具分工和可查修改记录对应。
+
+本说明的规范依据为项目内《全国大学生数学建模竞赛人工智能工具使用规定（2026年试行）》，自2026年9月1日起试行；本次核对了其中关于公开透明、论文声明、详情说明四项内容及人工审查的要求。
+\end{document}

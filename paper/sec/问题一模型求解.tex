@@ -1,0 +1,230 @@
+% 5.2：参考先前独立求解稿，压缩为离散边界处理、线性系统及题目规定结果。
+% 表1、表2沿用结果/p1_论文表格.md；本次写作未重算生产解。
+\subsection{模型求解}
+\label{sec:p1-solution}
+
+上节建立的温度方程与水分方程具有相同的扩散结构。以$u$表示待求场量，
+两个初边值问题的一般形式为
+\begin{equation*}
+\begin{gathered}
+  a\frac{\partial u}{\partial t}
+    =\frac{1}{r}\frac{\partial}{\partial r}
+      \left(r\Gamma\frac{\partial u}{\partial r}\right),
+    \qquad 0<r<R_0,\quad 0<t\le1800\ \mathrm{s},\\
+  u(r,0)=u_0,\qquad
+  \left.\frac{\partial u}{\partial r}\right|_{r=0}=0,\qquad
+  -\left.\Gamma\frac{\partial u}{\partial r}\right|_{r=R_0}
+    =\beta[u(R_0,t)-u_a(t)].
+\end{gathered}
+\end{equation*}
+其中，温度场取$u=T$、$(a,\Gamma,\beta,u_a)=(\rho c_p,k,h,T_a)$、
+$u_0=28\tempunit$；水分场取$u=C$、$(a,\Gamma,\beta,u_a)=(1,D(C),h_m,C_a)$、
+$u_0=2.55\cunit$。式\eqref{eq:p1-environment}已将离散记录转化为任意时刻可取值的环境函数。
+有限体积法以控制体上的积分守恒关系为基础，能够在离散层面较好地体现热量与水分的局部及整体守恒\cite{nht}。
+因此，本文采用有限体积法进行空间离散，将上述偏微分方程化为节点值的常微分方程组，
+再通过隐式时间推进形成可求解的线性系统。
+
+\subsubsection{将边界条件纳入空间离散}
+
+取节点$0=r_0<r_1<\cdots<r_N=R_0$，令$u_i(t)\approx u(r_i,t)$。
+以相邻节点中点$r_{i+1/2}=(r_i+r_{i+1})/2$为内部控制面，并令
+$r_{-1/2}=0$、$r_{N+1/2}=R_0$，则第$i$个控制体对应区间
+$[r_{i-1/2},r_{i+1/2}]$，中心和表面处的控制体由边界截断。
+按圆柱体积元$2\pi Lr\,\dd r$在该控制体上对一般方程积分，
+并约去公共因子$2\pi L$，得到
+\begin{equation*}
+  \int_{r_{i-1/2}}^{r_{i+1/2}}
+    a\frac{\partial u}{\partial t}\,r\,\dd r
+  =\left.r\Gamma\frac{\partial u}{\partial r}\right|_{r_{i+1/2}}
+   -\left.r\Gamma\frac{\partial u}{\partial r}\right|_{r_{i-1/2}}.
+\end{equation*}
+这一步仍是精确的控制体收支关系：左端为储存率，右端为通过两个控制面的净输入。
+空间散度已化为面值之差，接下来只需用离散节点值近似储存项和面通量。
+为此定义
+\begin{equation}
+\begin{gathered}
+  V_i=\frac{r_{i+1/2}^{2}-r_{i-1/2}^{2}}{2},\qquad
+  G_{i+1/2}=\frac{r_{i+1/2}\Gamma_{i+1/2}}{r_{i+1}-r_i},\\
+  \Gamma_{i+1/2}=\frac{\Gamma_i+\Gamma_{i+1}}{2},\qquad B=R_0\beta.
+\end{gathered}
+\label{eq:p1-fvm-coefficients}
+\end{equation}
+其中$V_i=\int_{r_{i-1/2}}^{r_{i+1/2}}r\,\dd r$为控制体积权重，
+$G_{i+1/2}$合并了控制面半径、面物性及节点间距。
+用节点$i$处的变化率代表控制体内的储存率，左端近似为
+\begin{equation*}
+  \int_{r_{i-1/2}}^{r_{i+1/2}}
+    a\frac{\partial u}{\partial t}\,r\,\dd r
+  \approx aV_i\frac{\dd u_i}{\dd t}.
+\end{equation*}
+对内部控制面，用跨越该面的相邻节点差商近似梯度，便有
+\begin{equation*}
+  \left.r\Gamma\frac{\partial u}{\partial r}\right|_{r_{i+1/2}}
+  \approx
+  r_{i+1/2}\Gamma_{i+1/2}\frac{u_{i+1}-u_i}{r_{i+1}-r_i}
+  =G_{i+1/2}(u_{i+1}-u_i),\qquad 0\le i<N.
+\end{equation*}
+内侧控制面的对应项为$G_{i-1/2}(u_i-u_{i-1})$。
+将外、内两个面值相减，内部控制体的净输入即化为
+$G_{i-1/2}(u_{i-1}-u_i)+G_{i+1/2}(u_{i+1}-u_i)$。
+
+两个边界面按已建立的边界条件处理。中心处的对称条件给出零通量，且该面的面积为零；
+表面处则直接将第三类边界代入积分式，得到
+\begin{equation*}
+  \left.r\Gamma\frac{\partial u}{\partial r}\right|_{r=R_0}
+  =R_0\beta[u_a(t)-u_N]
+  =B[u_a(t)-u_N].
+\end{equation*}
+该项表示环境向表面控制体的净输入，环境值$u_a(t)$已知，表面值$u_N(t)$仍需与内部节点一同求解。
+将储存项、内部面通量及边界通量合并，对全部控制体统一写为
+\begin{equation}
+  aV_i\frac{\dd u_i}{\dd t}
+  =G_{i-1/2}(u_{i-1}-u_i)+G_{i+1/2}(u_{i+1}-u_i)
+    +\delta_{iN}B[u_a(t)-u_N].
+  \label{eq:p1-fvm}
+\end{equation}
+这里$\delta_{iN}$仅在表面节点$i=N$时为1，不存在的边界邻接项取零。
+由此，原偏微分方程中的空间导数被相邻节点之间的交换项代替，仅保留各节点关于时间的导数。
+表面通量由边界条件直接给出，无需引入虚拟节点，
+式\eqref{eq:p1-fvm}明确了时变环境进入数值模型的位置。
+
+\subsubsection{时间推进与线性方程组的形成}
+
+令$t^n=n\Delta t$，在一次物性固定的计算中，将式\eqref{eq:p1-fvm}右端记为
+$\mathcal L_i(\boldsymbol u;u_a)$，采用
+\begin{equation}
+  \frac{aV_i}{\Delta t}(u_i^{n+1}-u_i^n)
+  =(1-\theta)\mathcal L_i(\boldsymbol u^n;u_a^n)
+    +\theta\mathcal L_i(\boldsymbol u^{n+1};u_a^{n+1}),
+  \label{eq:p1-time}
+\end{equation}
+其中$u_a^n=u_a(t^n)$、$u_a^{n+1}=u_a(t^{n+1})$均由插值式\eqref{eq:p1-environment}取得。
+常规步取$\theta=1/2$，对温度方程即为Crank--Nicolson格式\cite{cn}。
+为衰减初始均匀场与表面立即失水之间的失配所激发的快速分量，前两步取$\theta=1$作隐式阻尼启动。
+
+记$m_i=aV_i/\Delta t$、$S_i=G_{i-1/2}+G_{i+1/2}+\delta_{iN}B$，
+并令$d_i=m_i+\theta S_i$，不存在的边界邻接项仍取零。
+将本次待求的新层节点值记为$x_i$，把式\eqref{eq:p1-time}中的未知项移至左端，
+按从中心到表面的节点顺序排列，得到三对角线性方程组
+\begin{equation}
+\setlength{\arraycolsep}{3pt}
+\begin{pmatrix}
+  d_0 & -\theta G_{1/2} & 0 & \cdots & 0\\
+  -\theta G_{1/2} & d_1 & -\theta G_{3/2} & \ddots & \vdots\\
+  0 & \ddots & \ddots & \ddots & 0\\
+  \vdots & \ddots & -\theta G_{N-3/2} & d_{N-1} & -\theta G_{N-1/2}\\
+  0 & \cdots & 0 & -\theta G_{N-1/2} & d_N
+\end{pmatrix}
+\begin{pmatrix}
+  x_0\\x_1\\\vdots\\x_{N-1}\\x_N
+\end{pmatrix}
+=
+\begin{pmatrix}
+  b_0\\b_1\\\vdots\\b_{N-1}\\b_N
+\end{pmatrix}.
+\label{eq:p1-linear-system}
+\end{equation}
+系数矩阵除主对角线及其上下相邻两条副对角线外均为零，反映每个控制体仅与相邻控制体直接交换热量或水分，非相邻位置的影响通过逐层传递实现。
+其中，中心处的主对角元为$d_0=m_0+\theta G_{1/2}$，
+表面处为$d_N=m_N+\theta(G_{N-1/2}+B)$；
+右端向量的各分量为
+\begin{equation*}
+  b_i=m_i u_i^n+(1-\theta)\mathcal L_i(\boldsymbol u^n;u_a^n)
+       +\delta_{iN}\theta B u_a^{n+1},\qquad 0\le i\le N.
+\end{equation*}
+右端的旧层场、环境值和本轮固定的系数均已知，因此可直接求出本轮的全部节点值。
+矩阵首行已纳入中心零通量条件；为明确时变环境的作用，将对应表面节点的最后一行展开为
+\begin{equation}
+\begin{aligned}
+  &-\theta G_{N-1/2}x_{N-1}
+    +[m_N+\theta(G_{N-1/2}+B)]x_N\\
+  &\quad=[m_N-(1-\theta)(G_{N-1/2}+B)]u_N^n
+    +(1-\theta)G_{N-1/2}u_{N-1}^n\\
+  &\qquad\quad+B[(1-\theta)u_a^n+\theta u_a^{n+1}].
+\end{aligned}
+\label{eq:p1-surface-row}
+\end{equation}
+\begin{samepage}
+\textbf{环境在步首、步末的已知值加权后进入右端，未知表面值的交换系数$\theta B$则加入主对角元。}
+这使离散且随时间变化的边界数据在每一步都有明确的进入位置，并保持方程组的三对角结构。
+\par\end{samepage}
+
+温度场的$\Gamma=k$为常数，每步直接求得$\boldsymbol x=\boldsymbol T^{n+1}$。
+水分场的扩散系数依赖未知含水率，采用Picard迭代：
+从$\boldsymbol C^{n+1,(0)}=\boldsymbol C^n$开始，第$\ell$轮按中点状态计算节点物性
+\begin{equation}
+  \Gamma_i^{(\ell)}
+  =D\!\left(\frac{C_i^n+C_i^{n+1,(\ell)}}{2}\right),
+  \label{eq:p1-midpoint-picard}
+\end{equation}
+再依式\eqref{eq:p1-fvm-coefficients}计算面系数，并在新、旧两层通量中使用同一组固定的
+$G^{(\ell)}$，由式\eqref{eq:p1-linear-system}求出
+$\boldsymbol x=\boldsymbol C^{n+1,(\ell+1)}$。
+对参与Picard迭代的场，以相邻两轮迭代的最大改变量作为停止判据，
+温度与含水率的容差分别规定为
+\begin{equation}
+  \left\|\boldsymbol T^{n+1,(\ell+1)}
+       -\boldsymbol T^{n+1,(\ell)}\right\|_\infty
+       <10^{-6}\tempunit,\qquad
+  \left\|\boldsymbol C^{n+1,(\ell+1)}
+       -\boldsymbol C^{n+1,(\ell)}\right\|_\infty
+       <10^{-6}\cunit.
+  \label{eq:picard-tolerance}
+\end{equation}
+其中$\|\cdot\|_\infty$表示所有径向节点上绝对值的最大值。
+本问温度场无需迭代，仅检验含水率条件，迭代上限为20次。
+在$\theta=1/2$的常规步中，这一处理对应含水率中点状态上的非线性通量近似。
+环境时变直接更新右端末分量，水分方程的矩阵则还会随迭代物性更新。
+
+\subsubsection{数值实现与计算结果}
+
+各轮矩阵严格对角占优，具有唯一解\cite{num}；在Python中调用SciPy的
+\texttt{solve\_banded}求解式\eqref{eq:p1-linear-system}，单次运算量为$O(N)$。
+为分辨初期表面失水，采用882节点网格，在外侧$0.5\ \mathrm{mm}$加密；
+取$\Delta t=0.03125\ \mathrm{s}$推进至$1800\ \mathrm{s}$，环境插值折点均落在时间层上。
+
+每隔$1\ \mathrm{s}$在$r=0,0.1,\ldots,2.0\ \mathrm{cm}$处提取两场结果，
+以四位小数写入\texttt{result1.xlsx}；题定7个时刻、5个径向位置的结果见
+表\ref{tab:p1T}、表\ref{tab:p1C}。
+
+\begin{table}[!htbp]
+  \centering
+  \caption{30分钟内药材的温度（单位：$^{\circ}\mathrm{C}$）}
+  \label{tab:p1T}
+  \begin{tabularx}{\textwidth}{@{}YYYYYY@{}}
+    \toprule
+    \multirow{2}{*}{时间/$\mathrm{s}$}&\multicolumn{5}{c}{到药材中心的距离/$\mathrm{cm}$}\\
+    \cmidrule(lr){2-6}
+    &0&0.5&1&1.5&2\\
+    \midrule
+    100  &28.0001&28.0003&28.0040&28.0327&28.1801\\
+    300  &28.0408&28.0635&28.1514&28.3681&28.8489\\
+    600  &28.4533&28.5360&28.8039&29.3159&30.1652\\
+    900  &29.3243&29.4583&29.8755&30.6161&31.7304\\
+    1200 &30.5427&30.7098&31.2223&32.1126&33.4276\\
+    1500 &31.9957&32.1867&32.7660&33.7463&35.1203\\
+    1800 &33.5753&33.7720&34.3642&35.3621&36.7856\\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htbp]
+  \centering
+  \caption{30分钟内药材的水分浓度（单位：$\mathrm{kg/kg}$）}
+  \label{tab:p1C}
+  \begin{tabularx}{\textwidth}{@{}YYYYYY@{}}
+    \toprule
+    \multirow{2}{*}{时间/$\mathrm{s}$}&\multicolumn{5}{c}{到药材中心的距离/$\mathrm{cm}$}\\
+    \cmidrule(lr){2-6}
+    &0&0.5&1&1.5&2\\
+    \midrule
+    100  &2.5500&2.5500&2.5500&2.5500&2.2471\\
+    300  &2.5500&2.5500&2.5500&2.5492&2.0509\\
+    600  &2.5500&2.5500&2.5500&2.5353&1.8770\\
+    900  &2.5500&2.5500&2.5497&2.5045&1.7547\\
+    1200 &2.5500&2.5500&2.5482&2.4646&1.6586\\
+    1500 &2.5500&2.5499&2.5445&2.4206&1.5787\\
+    1800 &2.5500&2.5497&2.5383&2.3755&1.5102\\
+    \bottomrule
+  \end{tabularx}
+\end{table}

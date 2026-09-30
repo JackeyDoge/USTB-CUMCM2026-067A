@@ -1,0 +1,99 @@
+% 8.2：与code/p4.py主模型B的固定xi网格、中点半径及同步Picard一致。
+% 表6沿用既有生产结果，已核对NPZ、Excel与原结果表；本次写作未重算PDE。
+\subsection{模型求解}
+\label{sec:p4-solution}
+
+对式\eqref{eq:p4-fixed-pde}沿用有限体积离散与双场Picard迭代，
+将半径变化纳入系数，并将结果映射至题定物理位置。
+
+\subsubsection{固定坐标离散与时变系数的组装}
+
+在$0=\xi_0<\xi_1<\cdots<\xi_N=1$上设置固定网格，
+记$T_i^n\approx\widetilde T(\xi_i,t^n)$、
+$C_i^n\approx\widetilde C(\xi_i,t^n)$。
+控制面取相邻节点中点，两端为$\xi_{-1/2}=0$、$\xi_{N+1/2}=1$。
+无量纲积分权重与本步半径为
+\begin{equation}
+  \widehat V_i=\frac{\xi_{i+1/2}^2-\xi_{i-1/2}^2}{2},
+  \qquad
+  R_m^n=\frac{R(t^n)+R(t^{n+1})}{2}.
+  \label{eq:p4-discrete-geometry}
+\end{equation}
+其中$\widehat V_i$由固定网格确定，$R_m^n$在本步各轮迭代中保持不变。
+
+各轮物性均按式\eqref{eq:p2-midpoint}的时间中点状态代入式\eqref{eq:p4-properties}计算。
+面导通系数沿用式\eqref{eq:p1-fvm-coefficients}中的$G$定义，
+将$r$替换为$\xi$，$\Gamma$分别取$k$、$D$，面物性仍取算术平均。
+新增的时间项与表面交换系数为
+\begin{equation}
+\begin{aligned}
+  m_{T,i}^{(\ell)}
+    &=\frac{(R_m^n)^2(\rho c_p)_i^{(\ell)}\widehat V_i}{\Delta t_n},
+  &m_{C,i}
+    &=\frac{(R_m^n)^2\widehat V_i}{\Delta t_n},\\
+  B_T&=R_m^n h,
+  &B_C&=R_m^n h_m.
+\end{aligned}
+\label{eq:p4-discrete-coefficients}
+\end{equation}
+其中$(\rho c_p)_i^{(\ell)}$表示该中点状态下的$\rho(C)c_p(C)$。
+水分时间项为$m_{C,i}(C_i^{n+1}-C_i^n)$，即$(R_m^n)^2$乘场量增量，
+不能改写为$R^2C$的时间差分。
+
+将上述系数代入式\eqref{eq:p1-linear-system}组装两场三对角系统；
+同轮新、旧层通量共用中点物性及半径系数，环境值按式\eqref{eq:p1-surface-row}加权进入右端。
+
+\subsubsection{同步迭代与临界时刻定位}
+
+线性求解器、双场同步迭代及收敛条件沿用第\ref{sec:p2-solution}节，
+分段步长与仅最初两步隐式启动的设置沿用第\ref{sec:p3-solution}节。
+在$\xi$方向设置882个节点，并在$0.975<\xi\le1$内加密；
+实际位置为$r_i(t)=R(t)\xi_i$，环境与半径插值折点均落在时间层上。
+表面附近失水较快、含水率梯度较大，局部加密可更准确地分辨这一薄层内的场量变化及表面通量。
+
+每步收敛后按式\eqref{eq:p4-maximum}检查全部节点；
+中心与网格最大含水率之差始终不超过$10^{-12}\cunit$，故本算例由中心控制终点。
+首次穿越阈值时，按式\eqref{eq:p3-event-interpolation}对未舍入结果线性插值，
+得到$t_*$及整条$\xi$方向含水率分布，并计算$R(t_*)$。
+
+\subsubsection{烘干时长与结果输出}
+
+计算得到
+\begin{equation*}
+  \boxed{t_*\approx51.0905\ \mathrm{h}},\qquad
+  R(t_*)=1.200\ \mathrm{cm}.
+\end{equation*}
+对$r_q\le R(t)$，映射至$\xi_q=r_q/R(t)$并在相邻节点间线性插值；
+域外位置无内部场值，实际表面取$\xi_N=1$处的结果。
+每隔$6\ \mathrm{h}$及临界时刻的题定位置含水率见表\ref{tab:p4C}，
+横线表示域外位置，末列为实际表面。
+
+\begin{table}[!htbp]
+  \centering
+  \caption{考虑径向收缩时药材烘干过程的水分浓度（单位：$\mathrm{kg/kg}$）}
+  \label{tab:p4C}
+  \begin{tabularx}{\textwidth}{@{}C{0.22\textwidth}YYYYY@{}}
+    \toprule
+    \multirow{2}{*}{时间/$\mathrm{h}$}&\multicolumn{4}{c}{到药材中心的距离/$\mathrm{cm}$}
+      &\multirow{2}{*}{药材表面}\\
+    \cmidrule(lr){2-5}
+    &0&0.5&1&1.5&\\
+    \midrule
+    6  &1.7196&1.5377&1.0226&---&0.4207\\
+    12 &0.7377&0.6546&0.4083&---&0.1670\\
+    18 &0.4087&0.3686&0.2397&---&0.0892\\
+    24 &0.2851&0.2611&0.1790&---&0.0673\\
+    30 &0.2263&0.2094&0.1493&---&0.0595\\
+    36 &0.1928&0.1797&0.1317&---&0.0560\\
+    42 &0.1712&0.1604&0.1200&---&0.0541\\
+    48 &0.1561&0.1468&0.1116&---&0.0530\\
+    \mbox{\textbf{51.0905（结束）}}
+       &\textbf{0.1500}&\textbf{0.1413}&\textbf{0.1081}&\textbf{---}&\textbf{0.0526}\\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+表末行为$C_{\max}=C_*$的临界状态；继续计算至其后的首个整分钟\textbf{$183960\ \mathrm{s}$}，
+此时未舍入的$C_{\max}<C_*$。
+按$60\ \mathrm{s}$间隔及$r=0,0.1,\ldots,2.0\ \mathrm{cm}$位置，
+以四位小数写入\texttt{result4.xlsx}；域外留空，另设“药材表面”列。
